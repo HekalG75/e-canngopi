@@ -108,7 +108,7 @@ function showError(error) {
               <div class="card-header"> Waktu Absen </h3>
               </div>
                <div class="card-body">
-                  <p class="text-center">Hai, <b><?=$this->session->userdata('nama')?></b> Jangan lupa absen setiap hari jam 07:00 WIB<br> dan absen pulang jam 21:00 PM. <br><br></p>
+                  <p class="text-center">Hai, <b><?=$this->session->userdata('nama')?></b> Jangan lupa absen setiap hari jam 07:00 WIB<br> dan absen pulang jam 21:00 PM <br><br></p>
                 </div>
             </div>
           </section>
