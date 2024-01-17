@@ -108,7 +108,7 @@ function showError(error) {
               <div class="card-header"> Slip Gaji </h3>
               </div>
                <div class="card-body">
-                  <p class="text-center">Hai, <b><?=$this->session->userdata('nama')?></b> silahkan download slip gaji anda pada tombol berikut <br><br><a class="btn btn-info" href="<?=base_url('pegawai/slip')?>">Download Slip Gaji</a></p>
+                  <p class="text-center">Hai, <b><?=$this->session->userdata('nama')?></b> silahkan download slip gaji anda pada tombol berikut <br><br><a class="btn btn-info" href="<?=base_url('pegawai/slip')?>">Print Slip Gaji</a></p>
                 </div>
             </div>
           </section>
