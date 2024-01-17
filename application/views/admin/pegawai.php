@@ -14,7 +14,7 @@
                 <table id="myTable" class="table table-bordered table-striped text-center">
                     <thead>
                       <th>No</th>
-                      <th>NIP</th>
+                      <th>NIM</th>
                       <th>Nama</th>
                       <th>jenis kelamin</th>
                       <th>Jabatan</th>

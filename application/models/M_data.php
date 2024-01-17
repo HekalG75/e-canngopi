@@ -136,7 +136,8 @@ class M_data extends CI_Model {
 		$this->db->where('month(tanggal)',$bulan);
 		$this->db->where('day(tanggal)',$hari);
 		return $this->db->get();
-	}function izintoday($tahun,$bulan,$hari)
+	}
+	function izintoday($tahun,$bulan,$hari)
 	{
 		$this->db->select('*');
 		$this->db->from('cuti');

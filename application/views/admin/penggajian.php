@@ -14,7 +14,7 @@
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>NIP</th>
+                        <th>NIM</th>
                         <th>Nama</th>
                         <th>Hadir</th>
                         <th>Cuti</th>

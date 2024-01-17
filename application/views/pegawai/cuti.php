@@ -8,7 +8,7 @@
               <h5><i class="fas fa-info"></i> Note:</h5>
               Izin Cuti hanya diberikan untuk pegawai yang sudah bekerja selama 1 tahun ( Tidak terpotong gaji )<br>
               Izin Tidak masuk diberikan untuk siapa saja ( Dipotong gaji FULL ) <br>
-              Izin Sakit masuk diberikan untuk siapa saja dibuktikan dengan surat keterangan dokter ( DTidak terpotong gaji )
+              Izin Sakit masuk diberikan untuk siapa saja dibuktikan dengan surat keterangan dokter ( Tidak terpotong gaji )
             </div>
             <!-- Map card -->
             <div class="card">
@@ -43,9 +43,7 @@
                         </td>
                         <td><?=ucfirst($d->status)?></td>
                         <td>
-                          <?php if ($d->status == 'diajukan') { ?>
-                          <a onclick="return confirm('apakah anda yakin ingin menghapus pengajuan cuti ini?')" href="<?=base_url('pegawai/cuti_delete/'.$d->id_cuti)?>" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
-                          <?php } ?>
+                          
                           <?php if ($d->status == 'diterima') { ?>
                             <button class="btn btn-primary btn-sm">Pengajuan anda diterima</button>
                           <?php } ?>

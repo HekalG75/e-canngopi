@@ -26,10 +26,10 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 function showPosition(position) {
-  const targetLat = -6.2380021;
-  const targetLon = 106.6124707;
-  const userLat = -6.225335577237478;
-  const userLon = 106.62575430489602;
+  const targetLat = -6.225335577237478;
+  const targetLon = 106.62575430489602;
+  const userLat = -6.2380021;
+  const userLon = 106.6124707;
 
   // Tentukan radius dalam meter
   const radius = 3000.0;
@@ -105,10 +105,10 @@ function showError(error) {
 
             <!-- Map card -->
             <div class="card">
-              <div class="card-header"> Slip Gaji </h3>
+              <div class="card-header"> Waktu Absen </h3>
               </div>
                <div class="card-body">
-                  <p class="text-center">Hai, <b><?=$this->session->userdata('nama')?></b> silahkan download slip gaji anda pada tombol berikut <br><br><a class="btn btn-info" href="<?=base_url('pegawai/slip')?>">Print Slip Gaji</a></p>
+                  <p class="text-center">Hai, <b><?=$this->session->userdata('nama')?></b> Jangan lupa absen setiap hari jam 07:00 WIB<br> dan absen pulang jam 21:00 PM. <br><br></p>
                 </div>
             </div>
           </section>
