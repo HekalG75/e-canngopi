@@ -1,4 +1,4 @@
-Sistem Absensi E-CanNgopi berbasis web, menggunakan framework codeigniter 3
+Sistem Absensi E-CanNgopi berbasis web, menggunakan sistem Geofence location dan framework codeigniter 3
 
 
 Xampp versi 8.0.3 /PHP 8.0.3
