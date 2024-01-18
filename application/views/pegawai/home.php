@@ -26,13 +26,13 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 function showPosition(position) {
-  const targetLat = -6.225335577237478;
-  const targetLon = 106.62575430489602;
-  const userLat = -6.2380021;
-  const userLon = 106.6124707;
+  const targetLat = -6.2380256;
+  const targetLon = 106.6124749;
+  const userLat = position.coords.latitude;
+  const userLon = position.coords.longitude;
 
   // Tentukan radius dalam meter
-  const radius = 3000.0;
+  const radius = 1000.0;
 
   // Hitung jarak antara pengguna dan lokasi target
   const distance = calculateDistance(userLat, userLon, targetLat, targetLon);
