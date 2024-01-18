@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Jan 2024 pada 07.28
+-- Waktu pembuatan: 18 Jan 2024 pada 06.45
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -39,9 +39,7 @@ CREATE TABLE `absen` (
 --
 
 INSERT INTO `absen` (`id_absen`, `nip`, `waktu`, `keterangan`) VALUES
-(25, '333', '2024-01-15 21:01:11', 'masuk'),
-(26, '333', '2024-01-16 15:12:15', 'pulang'),
-(29, '333', '2024-01-16 21:25:15', 'masuk');
+(39, '421312312', '2024-01-18 05:43:01', 'masuk');
 
 -- --------------------------------------------------------
 
@@ -64,8 +62,7 @@ CREATE TABLE `cuti` (
 --
 
 INSERT INTO `cuti` (`id_cuti`, `nip`, `jenis_cuti`, `bukti`, `alasan`, `status`, `waktu_pengajuan`) VALUES
-(6, '333', 'sakit', 'cangopilogo.png', 'sakit', 'diterima', '2024-01-15 06:05:21'),
-(7, '333', 'izin', NULL, 'urusan keluarga', 'diterima', '2024-01-15 21:09:58');
+(15, '2110102018', 'izin', NULL, 'malaz', 'diterima', '2024-01-17 19:56:29');
 
 -- --------------------------------------------------------
 
@@ -113,7 +110,15 @@ INSERT INTO `detailcuti` (`id_detail`, `id_cuti`, `tanggal`) VALUES
 (7, 4, '2024-01-14'),
 (8, 5, '2024-01-15'),
 (9, 6, '2024-01-15'),
-(10, 7, '2024-01-16');
+(10, 7, '2024-01-16'),
+(11, 8, '2024-01-18'),
+(12, 9, '2024-01-18'),
+(13, 10, '2024-01-18'),
+(14, 11, '2024-01-18'),
+(15, 12, '2024-01-18'),
+(16, 13, '2024-01-18'),
+(17, 14, '2024-01-18'),
+(18, 15, '2024-01-18');
 
 -- --------------------------------------------------------
 
@@ -135,12 +140,9 @@ CREATE TABLE `pegawai` (
 
 INSERT INTO `pegawai` (`nip`, `jenis_kelamin`, `waktu_masuk`, `id_departemen`, `gaji`) VALUES
 ('1221', 'L', '2024-01-13', 1, 10000),
-('123124123', 'L', '2024-01-17', 1, 122222),
-('2110102018', 'L', '2024-01-13', 6, 50000),
+('2110102018', 'L', '2024-01-18', 6, 70000),
 ('333', 'L', '2024-01-14', 6, 10000),
-('421312312', 'L', '2024-01-15', 6, 10000),
-('4232312', 'L', '2024-01-17', 2, 12312),
-('4442312', 'L', '2024-01-17', 1, 12321);
+('421312312', 'L', '2024-01-15', 6, 10000);
 
 -- --------------------------------------------------------
 
@@ -163,13 +165,10 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `nama`, `email`, `password`, `level`, `nip`) VALUES
 (1, 'Administrator', 'admin@admin.com', '202cb962ac59075b964b07152d234b70', 'admin', NULL),
-(12, 'haikal', 'haikal@gmail.com', '539760b3222370b2754cbac577b2fc31', 'pegawai', '1221'),
-(16, 'hekal', 'hekal@gmail.com', 'e8588996ca160ec26585b0255184a3b9', 'pegawai', '2110102018'),
+(12, 'haikal', 'haikal@gmail.com', 'c7c6d6e78a8bcd606c9b1a328176c0a5', 'pegawai', '1221'),
 (17, 'udin', 'udin@gmail.com', '539760b3222370b2754cbac577b2fc31', 'pegawai', '333'),
 (18, 'user', 'user@gmail.com', '6ad14ba9986e3615423dfca256d04e3f', 'pegawai', '421312312'),
-(19, 'ea', 'ea@gmail.com', '539760b3222370b2754cbac577b2fc31', 'pegawai', '123124123'),
-(20, 'ae', 'ae@gmail.com', '539760b3222370b2754cbac577b2fc31', 'pegawai', '4232312'),
-(21, 'qw', 'qw@gmail.com', '539760b3222370b2754cbac577b2fc31', 'pegawai', '4442312');
+(24, 'Hekal', 'hekal@gmail.com', '539760b3222370b2754cbac577b2fc31', 'pegawai', '2110102018');
 
 -- --------------------------------------------------------
 
@@ -248,13 +247,13 @@ ALTER TABLE `web`
 -- AUTO_INCREMENT untuk tabel `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT untuk tabel `cuti`
 --
 ALTER TABLE `cuti`
-  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `departemen`
@@ -266,13 +265,13 @@ ALTER TABLE `departemen`
 -- AUTO_INCREMENT untuk tabel `detailcuti`
 --
 ALTER TABLE `detailcuti`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `web`
@@ -284,3 +283,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
