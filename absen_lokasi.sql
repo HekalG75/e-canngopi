@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Jan 2024 pada 06.45
+-- Waktu pembuatan: 19 Jan 2024 pada 19.17
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -39,7 +39,7 @@ CREATE TABLE `absen` (
 --
 
 INSERT INTO `absen` (`id_absen`, `nip`, `waktu`, `keterangan`) VALUES
-(39, '421312312', '2024-01-18 05:43:01', 'masuk');
+(42, '333', '2024-01-19 18:08:34', 'masuk');
 
 -- --------------------------------------------------------
 
@@ -56,13 +56,6 @@ CREATE TABLE `cuti` (
   `status` enum('diajukan','diterima','ditolak') NOT NULL,
   `waktu_pengajuan` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `cuti`
---
-
-INSERT INTO `cuti` (`id_cuti`, `nip`, `jenis_cuti`, `bukti`, `alasan`, `status`, `waktu_pengajuan`) VALUES
-(15, '2110102018', 'izin', NULL, 'malaz', 'diterima', '2024-01-17 19:56:29');
 
 -- --------------------------------------------------------
 
@@ -118,7 +111,8 @@ INSERT INTO `detailcuti` (`id_detail`, `id_cuti`, `tanggal`) VALUES
 (15, 12, '2024-01-18'),
 (16, 13, '2024-01-18'),
 (17, 14, '2024-01-18'),
-(18, 15, '2024-01-18');
+(18, 15, '2024-01-18'),
+(19, 16, '2024-01-20');
 
 -- --------------------------------------------------------
 
@@ -166,7 +160,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`user_id`, `nama`, `email`, `password`, `level`, `nip`) VALUES
 (1, 'Administrator', 'admin@admin.com', '202cb962ac59075b964b07152d234b70', 'admin', NULL),
 (12, 'haikal', 'haikal@gmail.com', 'c7c6d6e78a8bcd606c9b1a328176c0a5', 'pegawai', '1221'),
-(17, 'udin', 'udin@gmail.com', '539760b3222370b2754cbac577b2fc31', 'pegawai', '333'),
+(17, 'udin', 'udin@gmail.com', '539760b3222370b2754cbac577b2fc31', 'pegawaioutsite', '333'),
 (18, 'user', 'user@gmail.com', '6ad14ba9986e3615423dfca256d04e3f', 'pegawai', '421312312'),
 (24, 'Hekal', 'hekal@gmail.com', '539760b3222370b2754cbac577b2fc31', 'pegawai', '2110102018');
 
@@ -247,13 +241,13 @@ ALTER TABLE `web`
 -- AUTO_INCREMENT untuk tabel `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT untuk tabel `cuti`
 --
 ALTER TABLE `cuti`
-  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `departemen`
@@ -265,7 +259,7 @@ ALTER TABLE `departemen`
 -- AUTO_INCREMENT untuk tabel `detailcuti`
 --
 ALTER TABLE `detailcuti`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
@@ -283,4 +277,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
