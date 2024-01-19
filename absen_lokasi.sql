@@ -155,7 +155,7 @@ CREATE TABLE `user` (
   `nama` varchar(254) NOT NULL,
   `email` varchar(254) NOT NULL,
   `password` varchar(254) NOT NULL,
-  `level` enum('admin','pegawai') NOT NULL,
+  `level` enum('admin','pegawai','pegawaioutsite') NOT NULL,
   `nip` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
