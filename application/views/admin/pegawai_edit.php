@@ -9,11 +9,11 @@
             <div class="card">
               <div class="card-header"> <?=$title?> </h3>
               </div>
-              <form method="post" action="<?=base_url('admin/pegawai_update/'.$detail->nip)?>">
+              <form method="post" action="<?=base_url('admin/pegawai_update/'.$detail->nim)?>">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>NIP</label>
-                    <input type="text" name="nip" value="<?=$detail->nip?>" class="form-control" required="" readonly>
+                    <label>NIM</label>
+                    <input type="text" name="nim" value="<?=$detail->nim?>" class="form-control" required="" readonly>
                   </div>
                   <div class="form-group">
                     <label>Nama</label>
