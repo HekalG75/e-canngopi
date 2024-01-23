@@ -27,7 +27,7 @@
         </div>
         <div class="login-content">
             <form action="<?=base_url('auth/aksi_login')?>" method="post">
-                <img src="<?php echo base_url(); ?>assets/img/about.svg">
+                <img src="<?php echo base_url(); ?>assets/img/canngopilogo.png">
                 <h2 class="title"><?=$web->nama?></h2>
                 <div class="input-div one">
                     <div class="i">
