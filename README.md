@@ -3,6 +3,10 @@ Sistem Absensi E-CanNgopi berbasis web, menggunakan sistem Geofence location dan
 
 Xampp versi 8.0.3 /PHP 8.0.3
 
-admin: admin@admin.com /123
+Demo Live > https://haikalg75.000webhostapp.com/
 
-user: user@gmail.com /user123
+administrator> admin: admin@admin.com /123
+
+pegawai di lokasi canngopi> useron@gmail.com /user123
+
+pegawai diluar lokasi canngopi> userout@gmail.com /user123
