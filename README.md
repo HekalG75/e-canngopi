@@ -7,6 +7,6 @@ Demo Live > https://haikalg75.000webhostapp.com/
 
 administrator> admin: admin@admin.com /123
 
-pegawai di lokasi canngopi> useronsite@gmail.com /user123
+pegawai di lokasi canngopi> useron@gmail.com /user123
 
-pegawai diluar lokasi canngopi> useroutsite@gmail.com /user123
+pegawai diluar lokasi canngopi> userout@gmail.com /user123
