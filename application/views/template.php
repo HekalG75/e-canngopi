@@ -35,7 +35,7 @@
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand  navbar-light" style="background-color: #003b6f">
+  <nav class="main-header navbar navbar-expand  navbar-light" style="background-color: #c92222">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -55,7 +55,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #003b6f">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #d12626">
     <!-- Brand Logo -->
     <a href="#" class="brand-link " >
       <img src="<?=base_url('assets/')?>img/<?=$web->logo?>" alt="Logo <?=$web->nama?>" class="brand-image img-circle elevation-3"

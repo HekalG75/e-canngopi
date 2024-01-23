@@ -24,7 +24,7 @@
                       <th>Waktu</th>
                       <th>Keterangan</th>
                       <th>Status</th>
-                      <th>Opsi</th>
+                      <th>Status Pengajuan</th>
                     </thead>
                     <tbody>
                       <?php $no=1; foreach ($data as $d) { 

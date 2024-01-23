@@ -67,7 +67,7 @@ function showError(error) {
 <section class="col-lg-12 connectedSortable">
             <div class="callout callout-info">
               <h5><i class="fas fa-info"></i> Note:</h5>
-              Absen ini menggunakan sistem <b>GEOFENCING</b> (hanya bisa absen jika didalam area Canngopi-Kampus Pradita) <br>
+              Absen ini menggunakan sistem <b>GEOFENCING</b> (hanya bisa absen jika didalam area Canngopi) <br>
               Harap beri izin <b>akses lokasi</b> pada browser kamu, agar sistem bisa tau lokasi kamu <br>
               Apabila ada kesalahan lokasi silahkan cek ulang lokasi dengan menekan tombol dibawah<br>
               <button class="btn btn-primary" onclick="getLocation()">Cek lokasi</button><br>

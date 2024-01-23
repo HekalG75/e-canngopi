@@ -47,7 +47,7 @@
                         <input type="password" class="form-control" name="password" required="" >
                     </div>
                 </div>
-                <input type="submit" class="btn btn-primary" style="background-color: #003b6f" value="Login">
+                <input type="submit" class="btn btn-primary" style="background-color: #b50d0d" value="Login">
             </form>
         </div>
     </div>
