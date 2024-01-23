@@ -31,10 +31,10 @@
                         $bulan  = date('m');
                         $jumlah = 0;
                         $stotal = 0;
-                        $absen  = $this->M_data->absenbulan($data->nip,$tahun,$bulan)->num_rows(); 
-                        $cuti   = $this->M_data->cutibulan($data->nip,$tahun,$bulan)->num_rows(); 
-                        $sakit  = $this->M_data->sakitbulan($data->nip,$tahun,$bulan)->num_rows(); 
-                        $izin   = $this->M_data->izinbulan($data->nip,$tahun,$bulan)->num_rows();
+                        $absen  = $this->M_data->absenbulan($data->nim,$tahun,$bulan)->num_rows(); 
+                        $cuti   = $this->M_data->cutibulan($data->nim,$tahun,$bulan)->num_rows(); 
+                        $sakit  = $this->M_data->sakitbulan($data->nim,$tahun,$bulan)->num_rows(); 
+                        $izin   = $this->M_data->izinbulan($data->nim,$tahun,$bulan)->num_rows();
 
                         $gaji   = ($absen * $data->gaji) + ($cuti * $data->gaji) + ($sakit * $data->gaji);
                         //var_dump($cuti);
@@ -42,7 +42,7 @@
                       ?>
                       <tr>
                         <td width="1%"><?=$no++?></td>
-                        <td><?=ucfirst($data->nip)?></td>
+                        <td><?=ucfirst($data->nim)?></td>
                         <td><?=ucfirst($data->nama)?></td>
                         <td><?=$absen?></td>
                         <td><?=$cuti?></td>
