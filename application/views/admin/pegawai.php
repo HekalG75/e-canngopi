@@ -26,15 +26,15 @@
                       <?php $no=1; foreach ($data as $d) { ?>
                       <tr>
                         <td width="1%"><?=$no++?></td>
-                        <td><?=$d->nip?></td>
+                        <td><?=$d->nim?></td>
                         <td><?=ucfirst($d->nama)?></td>
                         <td><?=$d->jenis_kelamin?></td>
                         <td><?=ucfirst($d->departemen)?></td>
                         <td><?=$this->M_data->tgl_indo(date('Y-m-d'),strtotime($d->waktu_masuk))?></td>
                         <td>Rp. <?=number_format($d->gaji)?></td>
                         <td>
-                          <a href="<?=base_url('admin/pegawai_edit/'.$d->nip)?>" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span></a>
-                          <a onclick="return confirm('apakah anda yakin ingin menghapus pegawai ini?')" href="<?=base_url('admin/pegawai_delete/'.$d->nip)?>" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
+                          <a href="<?=base_url('admin/pegawai_edit/'.$d->nim)?>" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span></a>
+                          <a onclick="return confirm('apakah anda yakin ingin menghapus pegawai ini?')" href="<?=base_url('admin/pegawai_delete/'.$d->nim)?>" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
                         </td>
                       </tr>
                       <?php } ?>

@@ -13,7 +13,7 @@
                 <div class="card-body">
                   <div class="form-group">
                     <label>NIM</label>
-                    <input type="text" name="nip" class="form-control" required="" >
+                    <input type="text" name="nim" class="form-control" required="" >
                   </div>
                   <div class="form-group">
                     <label>Nama</label>

@@ -100,10 +100,10 @@ class Admin extends CI_Controller {
 			'email'		=> $p['email'],
 			'password'	=> md5($p['password']),
 			'level'		=> 'pegawai',
-			'nip'		=> $p['nip']
+			'nim'		=> $p['nim']
 		];
 		$pgw = [
-			'nip'			=> $p['nip'],
+			'nim'			=> $p['nim'],
 			'jenis_kelamin'	=> $p['jenis_kelamin'],
 			'id_departemen'	=> $p['departemen'],
 			'waktu_masuk'	=> $p['masuk'],
@@ -140,8 +140,8 @@ class Admin extends CI_Controller {
 			'gaji'			=> $p['gaji'],
 		];
 		$this->db->trans_start();
-		$this->db->update('user',$user,['nip'=>$id]);
-		$this->db->update('pegawai',$pgw,['nip'=>$id]);
+		$this->db->update('user',$user,['nim'=>$id]);
+		$this->db->update('pegawai',$pgw,['nim'=>$id]);
 		$this->db->trans_complete();
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Update Data Pegawai", "success");');
 		redirect('admin/pegawai');
@@ -149,8 +149,8 @@ class Admin extends CI_Controller {
 	public function pegawai_delete($id)
 	{
 		$this->db->trans_start();
-		$this->db->delete('user',['nip'=>$id]);
-		$this->db->delete('pegawai',['nip'=>$id]);
+		$this->db->delete('user',['nim'=>$id]);
+		$this->db->delete('pegawai',['nim'=>$id]);
 		$this->db->trans_complete();
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Delete Data Pegawai", "success");');
 		redirect('admin/pegawai');

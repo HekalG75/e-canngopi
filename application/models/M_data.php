@@ -7,7 +7,7 @@ class M_data extends CI_Model {
 	{
 		$this->db->select('*');
 	    $this->db->from('user');
-	    $this->db->join('pegawai','user.nip = pegawai.nip');
+	    $this->db->join('pegawai','user.nim = pegawai.nim');
 	    $this->db->join('departemen','pegawai.id_departemen = departemen.departemen_id');
        	return $this->db->get();
 	}
@@ -15,16 +15,16 @@ class M_data extends CI_Model {
 	{
 		$this->db->select('*');
 	    $this->db->from('user');
-	    $this->db->join('pegawai','user.nip = pegawai.nip');
+	    $this->db->join('pegawai','user.nim = pegawai.nim');
 	    $this->db->join('departemen','pegawai.id_departemen = departemen.departemen_id');
-	    $this->db->where('user.nip',$id);
+	    $this->db->where('user.nim',$id);
        	return $this->db->get();
 	}
 	function absendaily($id,$tahun,$bulan,$hari)
 	{
 		$this->db->select('*');
 		$this->db->from('absen');
-		$this->db->where('nip',$id);
+		$this->db->where('nim',$id);
 		$this->db->where('year(waktu)',$tahun);
 		$this->db->where('month(waktu)',$bulan);
 		$this->db->where('day(waktu)',$hari);
@@ -34,8 +34,8 @@ class M_data extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('absen');
-		$this->db->join('pegawai','absen.nip = pegawai.nip');
-		$this->db->join('user','pegawai.nip = user.nip');
+		$this->db->join('pegawai','absen.nim = pegawai.nim');
+		$this->db->join('user','pegawai.nim = user.nim');
 		$this->db->order_by('absen.waktu','desc');
 		return $this->db->get();
 	}
@@ -43,9 +43,9 @@ class M_data extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('absen');
-		$this->db->join('pegawai','absen.nip = pegawai.nip');
-		$this->db->join('user','pegawai.nip = user.nip');
-		$this->db->where('pegawai.nip',$id);
+		$this->db->join('pegawai','absen.nim = pegawai.nim');
+		$this->db->join('user','pegawai.nim = user.nim');
+		$this->db->where('pegawai.nim',$id);
 		$this->db->order_by('absen.waktu','desc');
 		return $this->db->get();
 	}
@@ -53,8 +53,8 @@ class M_data extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('cuti');
-		$this->db->join('pegawai','cuti.nip = pegawai.nip');
-		$this->db->join('user','pegawai.nip = user.nip');
+		$this->db->join('pegawai','cuti.nim = pegawai.nim');
+		$this->db->join('user','pegawai.nim = user.nim');
 		$this->db->order_by('cuti.id_cuti','desc');
 		return $this->db->get();
 	}
@@ -62,9 +62,9 @@ class M_data extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('cuti');
-		$this->db->join('pegawai','cuti.nip = pegawai.nip');
-		$this->db->join('user','pegawai.nip = user.nip');
-		$this->db->where('pegawai.nip',$id);
+		$this->db->join('pegawai','cuti.nim = pegawai.nim');
+		$this->db->join('user','pegawai.nim = user.nim');
+		$this->db->where('pegawai.nim',$id);
 		$this->db->order_by('cuti.id_cuti','desc');
 		return $this->db->get();
 	}
@@ -72,8 +72,8 @@ class M_data extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('absen');
-		$this->db->join('pegawai','absen.nip = pegawai.nip');
-		$this->db->join('user','pegawai.nip = user.nip');
+		$this->db->join('pegawai','absen.nim = pegawai.nim');
+		$this->db->join('user','pegawai.nim = user.nim');
 		$this->db->where('month(waktu)',$bulan);
 		$this->db->order_by('absen.waktu','desc');
 		return $this->db->get();
@@ -82,7 +82,7 @@ class M_data extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('absen');
-		$this->db->where('nip',$id);
+		$this->db->where('nim',$id);
 		$this->db->where('keterangan','masuk');
 		$this->db->where('year(waktu)',$tahun);
 		$this->db->where('month(waktu)',$bulan);
@@ -94,7 +94,7 @@ class M_data extends CI_Model {
 		$this->db->select('* ');
 		$this->db->from('cuti');
 		$this->db->join('detailcuti','cuti.id_cuti = detailcuti.id_cuti');
-		$this->db->where('nip',$id);
+		$this->db->where('nim',$id);
 		$this->db->where('jenis_cuti','cuti');
 		$this->db->where('status','diterima');
 		$this->db->where('year(tanggal)',$tahun);
@@ -106,7 +106,7 @@ class M_data extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('cuti');
 		$this->db->join('detailcuti','cuti.id_cuti = detailcuti.id_cuti');
-		$this->db->where('nip',$id);
+		$this->db->where('nim',$id);
 		$this->db->where('jenis_cuti','sakit');
 		$this->db->where('status','diterima');
 		$this->db->where('year(tanggal)',$tahun);
@@ -118,7 +118,7 @@ class M_data extends CI_Model {
 		$this->db->select('*');
 		$this->db->from('cuti');
 		$this->db->join('detailcuti','cuti.id_cuti = detailcuti.id_cuti');
-		$this->db->where('nip',$id);
+		$this->db->where('nim',$id);
 		$this->db->where('jenis_cuti','izin');
 		$this->db->where('status','diterima');
 		$this->db->where('year(tanggal)',$tahun);

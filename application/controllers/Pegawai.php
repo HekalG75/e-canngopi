@@ -18,7 +18,7 @@ class Pegawai extends CI_Controller {
 		$tahun 			= date('Y');
 		$bulan 			= date('m');
 		$hari 			= date('d');
-		$absen			= $this->M_data->absendaily($this->session->userdata('nip'),$tahun,$bulan,$hari); 
+		$absen			= $this->M_data->absendaily($this->session->userdata('nim'),$tahun,$bulan,$hari); 
 		if ($absen->num_rows() == 0) { $data['waktu'] = 'masuk'; }
 		elseif ($absen->num_rows() == 1) { $data['waktu'] = 'pulang'; }
 		else { $data['waktu'] = 'dilarang'; }
@@ -30,10 +30,10 @@ class Pegawai extends CI_Controller {
 	//proses absen
 	public function proses_absen()
 	{
-		$id = $this->session->userdata('nip');
+		$id = $this->session->userdata('nim');
 		$p = $this->input->post();
 		$data = [
-			'nip'	=> $id,
+			'nim'	=> $id,
 			'keterangan' => $p['ket']
 		];
 		if($p['lok'] == '1'){
@@ -48,7 +48,7 @@ class Pegawai extends CI_Controller {
 	public function absensi()
 	{
 		$data['web']	= $this->web;
-		$data['data']	= $this->M_data->absensi_pegawai($this->session->userdata('nip'))->result();
+		$data['data']	= $this->M_data->absensi_pegawai($this->session->userdata('nim'))->result();
 		$data['title']	= 'Data Absen';
 		$data['body']	= 'pegawai/absen';
 		$this->load->view('template',$data);
@@ -57,8 +57,8 @@ class Pegawai extends CI_Controller {
 	public function cuti()
 	{
 		$data['web']	= $this->web;
-		$data['data']	= $this->M_data->cuti_pegawai($this->session->userdata('nip'))->result();
-		$pegawai = $this->M_data->pegawaiid($this->session->userdata('nip'))->row();
+		$data['data']	= $this->M_data->cuti_pegawai($this->session->userdata('nim'))->result();
+		$pegawai = $this->M_data->pegawaiid($this->session->userdata('nim'))->row();
 		$dt1 = new DateTime($pegawai->waktu_masuk);
 		$dt2 = new DateTime(date('Y-m-d'));
 		$d = $dt2->diff($dt1)->days + 1;
@@ -70,7 +70,7 @@ class Pegawai extends CI_Controller {
 	public function cuti_add()
 	{
 		$data['web']	= $this->web;
-		$pegawai = $this->M_data->pegawaiid($this->session->userdata('nip'))->row();
+		$pegawai = $this->M_data->pegawaiid($this->session->userdata('nim'))->row();
 		$dt1 = new DateTime($pegawai->waktu_masuk);
 		$dt2 = new DateTime(date('Y-m-d'));
 		$d = $dt2->diff($dt1)->days + 1;
@@ -83,7 +83,7 @@ class Pegawai extends CI_Controller {
 	{
 		$this->db->trans_start();
 		$data = array(
-			'nip'			=> $this->session->userdata('nip'),
+			'nim'			=> $this->session->userdata('nim'),
 			'jenis_cuti'	=> $this->input->post('jenis'),
 			'alasan'		=> $this->input->post('alasan'),
 			'status'		=> 'diajukan'
@@ -128,7 +128,7 @@ class Pegawai extends CI_Controller {
 	public function cuti_update($id)
 	{
 		$data = array(
-			'nip'	=> $this->session->userdata('nip'),
+			'nim'	=> $this->session->userdata('nim'),
 			'mulai'	=> $this->input->post('mulai'),
 			'akhir'	=> $this->input->post('akhir'),
 			'alasan'=> $this->input->post('alasan')
@@ -155,7 +155,7 @@ class Pegawai extends CI_Controller {
 	public function profile()
 	{
 		$data['web']	= $this->web;
-		$data['data']	= $this->M_data->pegawaiid($this->session->userdata('nip'))->row();
+		$data['data']	= $this->M_data->pegawaiid($this->session->userdata('nim'))->row();
 		$data['title']	= 'Profile Pengguna';
 		$data['body']	= 'pegawai/profile';
 		$this->load->view('template',$data);
@@ -167,8 +167,8 @@ class Pegawai extends CI_Controller {
 			'email'	=> $this->input->post('email'),
 		];
 		$this->db->trans_start();
-		$this->db->update('user',$usr,['nip'=>$id]);
-		$this->db->update('pegawai',['jenis_kelamin'=>$this->input->post('jenis_kelamin')],['nip'=>$id]);
+		$this->db->update('user',$usr,['nim'=>$id]);
+		$this->db->update('pegawai',['jenis_kelamin'=>$this->input->post('jenis_kelamin')],['nim'=>$id]);
 		$this->db->trans_complete();
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Update profile", "success");');
 		redirect('pegawai/profile');
@@ -183,11 +183,11 @@ class Pegawai extends CI_Controller {
 	public function password_update($id)
 	{
 		$p = $this->input->post();
-		$cek = $this->db->get_where('user',['nip'=>$id]);
+		$cek = $this->db->get_where('user',['nim'=>$id]);
 		if ($cek->num_rows() > 0) {
 			$a = $cek->row();
 			if (md5($p['pw_lama']) == $a->password) {
-				$this->db->update('user',['password'=>md5($p['pw_baru'])],['nip'=>$id]);
+				$this->db->update('user',['password'=>md5($p['pw_baru'])],['nim'=>$id]);
 				$this->session->set_flashdata('message', 'swal("Berhasil!", "Update password", "success");');
 				redirect('pegawai/ganti_password');
 			}
@@ -207,11 +207,11 @@ class Pegawai extends CI_Controller {
 	{
 		$tahun 			= date('Y');
 		$bulan 			= date('m');
-		$data['data']	= $this->M_data->pegawaiid($this->session->userdata('nip'))->row();
-		$data['absen']  = $this->M_data->absenbulan($this->session->userdata('nip'),$tahun,$bulan)->num_rows(); 
-        $data['cuti']  	= $this->M_data->cutibulan($this->session->userdata('nip'),$tahun,$bulan)->num_rows(); 
-        $data['sakit']  = $this->M_data->sakitbulan($this->session->userdata('nip'),$tahun,$bulan)->num_rows(); 
-        $data['izin']  	= $this->M_data->izinbulan($this->session->userdata('nip'),$tahun,$bulan)->num_rows();
+		$data['data']	= $this->M_data->pegawaiid($this->session->userdata('nim'))->row();
+		$data['absen']  = $this->M_data->absenbulan($this->session->userdata('nim'),$tahun,$bulan)->num_rows(); 
+        $data['cuti']  	= $this->M_data->cutibulan($this->session->userdata('nim'),$tahun,$bulan)->num_rows(); 
+        $data['sakit']  = $this->M_data->sakitbulan($this->session->userdata('nim'),$tahun,$bulan)->num_rows(); 
+        $data['izin']  	= $this->M_data->izinbulan($this->session->userdata('nim'),$tahun,$bulan)->num_rows();
 		$data['web']	= $this->web;
 		$data['title']	= 'Slip Gaji';
 		$data['body']	= 'pegawai/slip';
@@ -221,11 +221,11 @@ class Pegawai extends CI_Controller {
 	{
 		$tahun 			= date('Y');
 		$bulan 			= date('m');
-		$data['data']	= $this->M_data->pegawaiid($this->session->userdata('nip'))->row();
-		$data['absen']  = $this->M_data->absenbulan($this->session->userdata('nip'),$tahun,$bulan)->num_rows(); 
-        $data['cuti']  	= $this->M_data->cutibulan($this->session->userdata('nip'),$tahun,$bulan)->num_rows(); 
-        $data['sakit']  = $this->M_data->sakitbulan($this->session->userdata('nip'),$tahun,$bulan)->num_rows(); 
-        $data['izin']  	= $this->M_data->izinbulan($this->session->userdata('nip'),$tahun,$bulan)->num_rows();
+		$data['data']	= $this->M_data->pegawaiid($this->session->userdata('nim'))->row();
+		$data['absen']  = $this->M_data->absenbulan($this->session->userdata('nim'),$tahun,$bulan)->num_rows(); 
+        $data['cuti']  	= $this->M_data->cutibulan($this->session->userdata('nim'),$tahun,$bulan)->num_rows(); 
+        $data['sakit']  = $this->M_data->sakitbulan($this->session->userdata('nim'),$tahun,$bulan)->num_rows(); 
+        $data['izin']  	= $this->M_data->izinbulan($this->session->userdata('nim'),$tahun,$bulan)->num_rows();
 		$data['web']	= $this->web;
 		$data['title']	= 'Slip Gaji '.$this->session->userdata('nama');
 		$this->load->view('pegawai/slip_print',$data);
