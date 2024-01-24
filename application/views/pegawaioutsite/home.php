@@ -12,7 +12,7 @@
         <!-- Main row -->
         <div class="row">
 
-          <section class="col-lg-6 connectedSortable">
+          <section class="col-lg-6 ">
             <!-- Map card -->
             <div class="card"> 
               <div class="card-header"> Notifikasi </h3>
@@ -25,21 +25,21 @@
                   <input type="hidden" name="ket" id="ket" value="<?=$waktu?>">
                       <input type="hidden" name="lok" id="lok" value="1">
                     <?php } else { ?>
-                  <p class="text-center">Hai, <?=$this->session->userdata('nama')?> anda hari ini sudah melakukan absensi <b>Masuk</b> dan <b>Pulang</b></p>
+                  <p class="text-center">Hai, <?=$this->session->userdata('nama')?> anda hari ini sudah melakukan absensi <b>Masuk</b></p>
                   <?php }  ?>
                 </div>
                 </form>
             </div>
           </section>
 
-          <section class="col-lg-6 connectedSortable">
+          <section class="col-lg-6 ">
 
             <!-- Map card -->
             <div class="card">
               <div class="card-header"> Waktu Absen </h3>
               </div>
                <div class="card-body">
-                  <p class="text-center">Hai, <b><?=$this->session->userdata('nama')?></b> Jangan lupa absen setiap hari jam 07:00 WIB<br> dan absen pulang jam 21:00 PM <br><br></p>
+                  <p class="text-center">Hai, <b><?=$this->session->userdata('nama')?></b> Jangan lupa absen setiap hari Batas jam 07:00-09:00 WIB<br><br></p>
                 </div>
             </div>
           </section>
