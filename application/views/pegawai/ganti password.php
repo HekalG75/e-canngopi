@@ -13,7 +13,7 @@
                     </div>
                   </div>
                 </div>
-                <form method="post" action="<?=base_url('pegawai/password_update/'.$this->session->userdata('nip'))?>">
+                <form method="post" action="<?=base_url('pegawai/password_update/'.$this->session->userdata('nim'))?>">
                 <div class="card-body">
                   <div class="form-group">
                     <input type="password" name="pw_lama" class="form-control" required="" placeholder="Masukan Password lama anda">

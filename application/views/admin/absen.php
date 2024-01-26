@@ -16,6 +16,7 @@
                       <th>Nama</th>
                       <th>Waktu</th>
                       <th>Keterangan</th>
+                      <th>Opsi</th>
                     </thead>
                     <tbody>
                       <?php $no=1; foreach ($data as $d) { ?>
@@ -24,6 +25,7 @@
                         <td><?=ucfirst($d->nama)?></td>
                         <td><?=ucfirst($d->waktu)?></td>
                         <td><?=ucfirst($d->keterangan)?></td>
+                        <td> <a onclick="return confirm('apakah anda yakin ingin menghapus absensi pegawai ini?')" href="<?=base_url('admin/absen_delete/'.$d->nim)?>" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a></td>
                       </tr>
                       <?php } ?>
                     </tbody>

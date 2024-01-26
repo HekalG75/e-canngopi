@@ -13,7 +13,7 @@
                     </div>
                   </div>
                 </div>
-                <form method="post" action="<?=base_url('pegawai/profile_update/'.$this->session->userdata('nip'))?>">
+                <form method="post" action="<?=base_url('pegawai/profile_update/'.$this->session->userdata('nim'))?>">
                 <div class="card-body">
                   <div class="form-group">
                     <label>Nama</label>

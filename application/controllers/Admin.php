@@ -165,6 +165,16 @@ class Admin extends CI_Controller {
 		$data['body']	= 'admin/absen';
 		$this->load->view('template',$data);
 	}
+	public function absen_delete($id)
+	{
+   		 $this->db->trans_start();
+    //Gunakan klausa Where untuk hanya menghapus rekaman dengan ID yang ditentukan.
+    	$this->db->where('nim', $id);
+   		$this->db->delete('absen');
+    	$this->db->trans_complete();
+    	$this->session->set_flashdata('message', 'swal("Berhasil!", "Delete Data absensi", "success");');
+    redirect('admin/absensi');
+	}
 	//Data pengajuan cuti
 	public function cuti()
 	{

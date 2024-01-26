@@ -68,7 +68,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-          <a href="#" class="d-block"><small>User login :</small><br> <b><?=$this->session->userdata('nama')?> ( <?=$this->session->userdata('level')?> )</b></a>
+          <a href="<?=base_url('admin/profile')?>" class="d-block"><small>User login :</small><br> <b><?=$this->session->userdata('nama')?> ( <?=$this->session->userdata('level')?> )</b></a>
         </div>
       </div>
 
