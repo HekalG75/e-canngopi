@@ -88,14 +88,31 @@ function showError(error) {
               </div>
               <form method="post" action="pegawai/proses_absen">
                <div class="card-body">
-                  <?php if ($waktu != 'dilarang') { ?>
-                  <p class="text-center">Hai, <?=$this->session->userdata('nama')?> anda hari ini belum melakukan absen <b><?=$waktu?></b>. Silahkan lakukan absen pada tombol absen berikut <br><br>
-                  <button class="btn btn-primary">Absen <?=$waktu?></button></p>
-                  <input type="hidden" name="ket" id="ket" value="<?=$waktu?>">
+                  <?php if ($waktu != 'dilarang') {
+                  // Tentukan waktu absen yang diizinkan
+                  $waktuAbsenMulai = strtotime('03:51:00'); // Ganti dengan waktu mulai yang diizinkan
+                  $waktuAbsenSelesai = strtotime('03:52:00'); // Ganti dengan waktu selesai yang diizinkan
+                  $waktuServerSekarang = strtotime(date('H:i:s'));
+
+                  if ($waktuServerSekarang >= $waktuAbsenMulai && $waktuServerSekarang <= $waktuAbsenSelesai) {
+                      ?>
+                      <p class="text-center">Hai, <?=$this->session->userdata('nama')?>, Anda belum absen pada <b><?=$waktu?></b>. Silakan absen sekarang!<br><br>
+                          <button class="btn btn-primary">Absen <?=$waktu?></button></p>
+                      <input type="hidden" name="ket" id="ket" value="<?=$waktu?>">
                       <input type="hidden" name="lok" id="lok" value="1">
-                    <?php } else { ?>
-                  <p class="text-center">Hai, <?=$this->session->userdata('nama')?> anda hari ini sudah melakukan absensi <b>Masuk</b> dan <b>Pulang</b></p>
-                  <?php }  ?>
+                      <?php
+                  } else {
+                      // Diluar waktu absen yang diizinkan
+                      ?>
+                      <p class="text-center">Hai, <?=$this->session->userdata('nama')?>, saat ini diluar waktu absen yang diizinkan.</p>
+                      <?php
+                  }
+              } else {
+                  ?>
+                  <p class="text-center">Hai, <?=$this->session->userdata('nama')?>, Anda sudah absen hari ini.</p>
+                  <?php
+              }
+              ?>
                 </div>
                 </form>
             </div>
