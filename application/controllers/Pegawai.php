@@ -20,7 +20,7 @@ class Pegawai extends CI_Controller {
 		$hari 			= date('d');
 		$absen			= $this->M_data->absendaily($this->session->userdata('nim'),$tahun,$bulan,$hari); 
 		if ($absen->num_rows() == 0) { $data['waktu'] = 'masuk'; }
-		
+		elseif ($absen->num_rows() == 1) { $data['waktu'] = 'pulang'; }
 		else { $data['waktu'] = 'dilarang'; }
 		$data['web']	= $this->web;
 		$data['title']	= 'Dashboard';
