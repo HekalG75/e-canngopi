@@ -36,7 +36,7 @@
                 </div>
               </div>
               <div class="card-footer">
-                <a href="<?=base_url('pegawai/curi')?>" class="btn btn-danger">Kembali</a>
+                <a href="<?=base_url('pegawaioutsite/cuti')?>" class="btn btn-danger">Kembali</a>
                 <button class="btn btn-primary">Simpan</button>
               </div>
             </div>

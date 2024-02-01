@@ -20,6 +20,23 @@ class M_data extends CI_Model {
 	    $this->db->where('user.nim',$id);
        	return $this->db->get();
 	}
+	function pegawaioutsite()
+	{
+		$this->db->select('*');
+	    $this->db->from('useroutsite');
+	    $this->db->join('pegawaioutsite','useroutsite.nim = pegawaioutsite.nim');
+	    $this->db->join('departemen','pegawaioutsite.id_departemen = departemen.departemen_id');
+       	return $this->db->get();
+	}
+	function pegawaiidoutsite($id)
+	{
+		$this->db->select('*');
+	    $this->db->from('useroutsite');
+	    $this->db->join('pegawaioutsite','useroutsite.nim = pegawaioutsite.nim');
+	    $this->db->join('departemen','pegawaioutsite.id_departemen = departemen.departemen_id');
+	    $this->db->where('useroutsite.nim',$id);
+       	return $this->db->get();
+	}
 	function absendaily($id,$tahun,$bulan,$hari)
 	{
 		$this->db->select('*');
@@ -34,8 +51,8 @@ class M_data extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('absen');
-		$this->db->join('pegawai','absen.nim = pegawai.nim');
-		$this->db->join('user','pegawai.nim = user.nim');
+		$this->db->join('pegawai', 'absen.nim = pegawai.nim');
+    	$this->db->join('user', 'pegawai.nim = user.nim');
 		$this->db->order_by('absen.waktu','desc');
 		return $this->db->get();
 	}
@@ -49,12 +66,31 @@ class M_data extends CI_Model {
 		$this->db->order_by('absen.waktu','desc');
 		return $this->db->get();
 	}
+	public function absensi_pegawaioutsite($id)
+	{
+		$this->db->select('*');
+		$this->db->from('absen');
+		$this->db->join('pegawaioutsite','absen.nim = pegawaioutsite.nim');
+		$this->db->join('useroutsite','pegawaioutsite.nim = useroutsite.nim');
+		$this->db->where('pegawaioutsite.nim',$id);
+		$this->db->order_by('absen.waktu','desc');
+		return $this->db->get();
+	}
 	public function cuti()
 	{
 		$this->db->select('*');
 		$this->db->from('cuti');
 		$this->db->join('pegawai','cuti.nim = pegawai.nim');
 		$this->db->join('user','pegawai.nim = user.nim');
+		$this->db->order_by('cuti.id_cuti','desc');
+		return $this->db->get();
+	}
+	public function cutioutsite()
+	{
+		$this->db->select('*');
+		$this->db->from('cuti');
+		$this->db->join('pegawaioutsite','cuti.nim = pegawaioutsite.nim');
+		$this->db->join('useroutsite','pegawaioutsite.nim = useroutsite.nim');
 		$this->db->order_by('cuti.id_cuti','desc');
 		return $this->db->get();
 	}
@@ -65,6 +101,16 @@ class M_data extends CI_Model {
 		$this->db->join('pegawai','cuti.nim = pegawai.nim');
 		$this->db->join('user','pegawai.nim = user.nim');
 		$this->db->where('pegawai.nim',$id);
+		$this->db->order_by('cuti.id_cuti','desc');
+		return $this->db->get();
+	}
+	public function cuti_pegawaioutsite($id)
+	{
+		$this->db->select('*');
+		$this->db->from('cuti');
+		$this->db->join('pegawaioutsite','cuti.nim = pegawaioutsite.nim');
+		$this->db->join('useroutsite','pegawaioutsite.nim = useroutsite.nim');
+		$this->db->where('pegawaioutsite.nim',$id);
 		$this->db->order_by('cuti.id_cuti','desc');
 		return $this->db->get();
 	}

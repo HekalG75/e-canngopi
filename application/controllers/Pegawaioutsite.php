@@ -48,7 +48,7 @@ class Pegawaioutsite extends CI_Controller {
 	public function absensi()
 	{
 		$data['web']	= $this->web;
-		$data['data']	= $this->M_data->absensi_pegawai($this->session->userdata('nim'))->result();
+		$data['data']	= $this->M_data->absensi_pegawaioutsite($this->session->userdata('nim'))->result();
 		$data['title']	= 'Data Absen';
 		$data['body']	= 'pegawaioutsite/absen';
 		$this->load->view('template',$data);
@@ -57,9 +57,9 @@ class Pegawaioutsite extends CI_Controller {
 	public function cuti()
 	{
 		$data['web']	= $this->web;
-		$data['data']	= $this->M_data->cuti_pegawai($this->session->userdata('nim'))->result();
-		$pegawai = $this->M_data->pegawaiid($this->session->userdata('nim'))->row();
-		$dt1 = new DateTime($pegawai->waktu_masuk);
+		$data['data']	= $this->M_data->cuti_pegawaioutsite($this->session->userdata('nim'))->result();
+		$pegawaioutsite = $this->M_data->pegawaiidoutsite($this->session->userdata('nim'))->row();
+		$dt1 = new DateTime($pegawaioutsite->waktu_masuk);
 		$dt2 = new DateTime(date('Y-m-d'));
 		$d = $dt2->diff($dt1)->days + 1;
 		$data['bakti']	= $d;
@@ -70,8 +70,8 @@ class Pegawaioutsite extends CI_Controller {
 	public function cuti_add()
 	{
 		$data['web']	= $this->web;
-		$pegawai = $this->M_data->pegawaiid($this->session->userdata('nim'))->row();
-		$dt1 = new DateTime($pegawai->waktu_masuk);
+		$pegawaioutsite = $this->M_data->pegawaiidoutsite($this->session->userdata('nim'))->row();
+		$dt1 = new DateTime($pegawaioutsite->waktu_masuk);
 		$dt2 = new DateTime(date('Y-m-d'));
 		$d = $dt2->diff($dt1)->days + 1;
 		$data['bakti']	= $d;
@@ -135,20 +135,6 @@ class Pegawaioutsite extends CI_Controller {
 		);
 		$this->db->update('cuti',$data,['id_cuti'=>$id]);
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Update pengajuan cuti", "success");');
-		redirect('pegawaioutsite/cuti');
-	}
-	public function cuti_edit($id)
-	{
-		$data['web']	= $this->web;
-		$data['title']	= 'Update Data Cuti';
-		$data['data']	= $this->db->get_where('cuti',['id_cuti'=>$id])->row();
-		$data['body']	= 'pegawai/cuti_edit';
-		$this->load->view('template',$data);
-	}
-	public function cuti_delete($id)
-	{
-		$this->db->delete('cuti',['id_cuti'=>$id]);
-		$this->session->set_flashdata('message', 'swal("Berhasil!", "Delete pengajuan cuti", "success");');
 		redirect('pegawaioutsite/cuti');
 	}
 	//update profile

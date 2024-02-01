@@ -26,8 +26,8 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 function showPosition(position) {
-  const targetLat = -6.2380256;
-  const targetLon = 106.6124749;
+  const targetLat = -6.1702144;
+  const targetLon = 106.7122688;
   const userLat = position.coords.latitude;
   const userLon = position.coords.longitude;
 

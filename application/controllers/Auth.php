@@ -26,7 +26,20 @@ class Auth extends CI_Controller {
             } elseif ($usr['level'] == 'pegawaioutsite') {
                 redirect('pegawaioutsite');
             }
-        } else {
+        }
+        $cek = $this->db->get_where('useroutsite', $data);
+        if ($cek->num_rows() > 0) {
+            $usr = $cek->row_array();
+            $this->session->set_userdata($usr);
+            if ($usr['level'] == 'admin') {
+                redirect('admin');
+            } elseif ($usr['level'] == 'pegawai') {
+                redirect('pegawai');
+            } elseif ($usr['level'] == 'pegawaioutsite') {
+                redirect('pegawaioutsite');
+            }
+        } 
+        else {
             $this->session->set_flashdata('message', 'swal("Ops!", "Email / Password yang anda masukan salah", "error");');
             redirect('Auth');
         }

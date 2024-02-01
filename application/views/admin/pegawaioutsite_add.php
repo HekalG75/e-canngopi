@@ -9,7 +9,7 @@
             <div class="card">
               <div class="card-header"> <?=$title?> </h3>
               </div>
-              <form method="post" action="<?=base_url('admin/pegawai_simpan/')?>">
+              <form method="post" action="<?=base_url('admin/pegawaioutsite_simpan/')?>">
                 <div class="card-body">
                   <div class="form-group">
                     <label>NIM</label>
@@ -50,7 +50,7 @@
                   </div>
                 </div>
                 <div class="card-footer">
-                  <a href="<?=base_url('admin/pegawai')?>" class="btn btn-danger">Kembali</a>
+                  <a href="<?=base_url('admin/pegawaioutsite')?>" class="btn btn-danger">Kembali</a>
                   <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
                 </form>

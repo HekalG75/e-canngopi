@@ -20,6 +20,7 @@ class Admin extends CI_Controller {
 		$hari 			= date('d');
 		$data['web']	= $this->web;
 		$data['pegawai']= $this->M_data->pegawai()->num_rows();
+		$data['pegawaioutsite']= $this->M_data->pegawaioutsite()->num_rows();
 		$data['hadir']	= $this->M_data->hadirtoday($tahun,$bulan,$hari)->num_rows();
 		$data['cuti']	= $this->M_data->cutitoday($tahun,$bulan,$hari)->num_rows();
 		$data['izin']	= $this->M_data->izintoday($tahun,$bulan,$hari)->num_rows() + $this->M_data->sakittoday($tahun,$bulan,$hari)->num_rows();
@@ -107,7 +108,7 @@ class Admin extends CI_Controller {
 			'jenis_kelamin'	=> $p['jenis_kelamin'],
 			'id_departemen'	=> $p['departemen'],
 			'waktu_masuk'	=> $p['masuk'],
-			'gaji'			=> $p['gaji'],
+			
 		];
 		$this->db->trans_start();
 		$this->db->insert('user',$user);
@@ -156,6 +157,87 @@ class Admin extends CI_Controller {
 		redirect('admin/pegawai');
 	}
 	//end CURD pegawai
+	//CURD Pegawaioutsite
+	public function pegawaioutsite()
+	{
+		$data['web']	= $this->web;
+		$data['data']	= $this->M_data->pegawaioutsite()->result();
+		$data['title']	= 'Data Pegawaioutsite';
+		$data['body']	= 'admin/pegawaioutsite'; 
+		$this->load->view('template',$data);
+	}
+	public function pegawaioutsite_add()
+	{
+		$data['web']	= $this->web;
+		$data['data']	= $this->db->get('departemen')->result();
+		$data['title']	= 'Tambah Data Pegawai';
+		$data['body']	= 'admin/pegawaioutsite_add';
+		$this->load->view('template',$data);
+	}
+	public function pegawaioutsite_simpan()
+	{
+		$p = $this->input->post();
+		$user = [
+			'nama'		=> $p['nama'],
+			'email'		=> $p['email'],
+			'password'	=> md5($p['password']),
+			'level'		=> 'pegawaioutsite',
+			'nim'		=> $p['nim']
+		];
+		$pgw = [
+			'nim'			=> $p['nim'],
+			'jenis_kelamin'	=> $p['jenis_kelamin'],
+			'id_departemen'	=> $p['departemen'],
+			'waktu_masuk'	=> $p['masuk'],
+			
+		];
+		$this->db->trans_start();
+		$this->db->insert('useroutsite',$user);
+		$this->db->insert('pegawaioutsite',$pgw);
+		$this->db->trans_complete();
+		$this->session->set_flashdata('message', 'swal("Berhasil!", "Tambah Data Pegawai", "success");');
+		redirect('admin/pegawaioutsite');
+	}
+	public function pegawaioutsite_edit($id)
+	{
+		$data['web']	= $this->web;
+		$data['data']	= $this->db->get('departemen')->result();
+		$data['detail']	= $this->M_data->pegawaiidoutsite($id)->row();
+		$data['title']	= 'Update Data Pegawai';
+		$data['body']	= 'admin/pegawaioutsite_edit';
+		$this->load->view('template',$data);
+	}
+	public function pegawaioutsite_update($id)
+	{
+		$p = $this->input->post();
+		$user = [
+			'nama'		=> $p['nama'],
+			'email'		=> $p['email'],
+			'password'	=> md5($p['password']),
+		];
+		$pgw = [
+			'jenis_kelamin'	=> $p['jenis_kelamin'],
+			'id_departemen'	=> $p['departemen'],
+			'waktu_masuk'	=> $p['masuk'],
+			
+		];
+		$this->db->trans_start();
+		$this->db->update('useroutsite',$user,['nim'=>$id]);
+		$this->db->update('pegawaioutsite',$pgw,['nim'=>$id]);
+		$this->db->trans_complete();
+		$this->session->set_flashdata('message', 'swal("Berhasil!", "Update Data Pegawai", "success");');
+		redirect('admin/pegawaioutsite');
+	}
+	public function pegawaioutsite_delete($id)
+	{
+		$this->db->trans_start();
+		$this->db->delete('useroutsite',['nim'=>$id]);
+		$this->db->delete('pegawaioutsite',['nim'=>$id]);
+		$this->db->trans_complete();
+		$this->session->set_flashdata('message', 'swal("Berhasil!", "Delete Data Pegawai", "success");');
+		redirect('admin/pegawaioutsite');
+	}
+	//end CURD pegawaioutsite
 	//Data Absensi
 	public function absensi()
 	{
@@ -322,13 +404,4 @@ class Admin extends CI_Controller {
 				redirect('auth');
 		}
 	}
-	//penggajian
-	public function penggajian()
-	{
-		$data['list']	= $this->M_data->pegawai()->result();
-		$data['web']	= $this->web;
-		$data['title']	= 'Penggajian Karyawan';
-		$data['body']	= 'admin/penggajian';
-		$this->load->view('template',$data);
 	}
-}

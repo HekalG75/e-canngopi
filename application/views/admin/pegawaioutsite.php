@@ -8,28 +8,36 @@
             <!-- Map card -->
             <div class="card">
               <div class="card-header"> <?=$title?> </h3>
+                <a style="float: right;" href="<?=base_url('admin/pegawaioutsite_add')?>" class="btn btn-sm btn-primary">Tambah data</a>
               </div>
               <div class="card-body table-responsive">
                 <table id="myTable" class="table table-bordered table-striped text-center">
                     <thead>
                       <th>No</th>
+                      <th>NIM</th>
                       <th>Nama</th>
-                      <th>Waktu</th>
-                      <th>Keterangan</th>
+                      <th>jenis kelamin</th>
+                      <th>Jabatan</th>
+                      <th>Waktu Masuk</th>
+                      
                       <th>Opsi</th>
                     </thead>
                     <tbody>
                       <?php $no=1; foreach ($data as $d) { ?>
-                      <?php $no=2; foreach ($data as $d) { ?>  
                       <tr>
                         <td width="1%"><?=$no++?></td>
+                        <td><?=$d->nim?></td>
                         <td><?=ucfirst($d->nama)?></td>
-                        <td><?=ucfirst($d->waktu)?></td>
-                        <td><?=ucfirst($d->keterangan)?></td>
-                        <td> <a onclick="return confirm('apakah anda yakin ingin menghapus absensi pegawai ini?')" href="<?=base_url('admin/absen_delete/'.$d->nim)?>" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a></td>
+                        <td><?=$d->jenis_kelamin?></td>
+                        <td><?=ucfirst($d->departemen)?></td>
+                        <td><?=$this->M_data->tgl_indo(date('Y-m-d'),strtotime($d->waktu_masuk))?></td>
+                        
+                        <td>
+                          <a href="<?=base_url('admin/pegawaioutsite_edit/'.$d->nim)?>" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span></a>
+                          <a onclick="return confirm('apakah anda yakin ingin menghapus pegawai ini?')" href="<?=base_url('admin/pegawaioutsite_delete/'.$d->nim)?>" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
+                        </td>
                       </tr>
                       <?php } ?>
-                       <?php } ?>
                     </tbody>
                   </table>
               </div>

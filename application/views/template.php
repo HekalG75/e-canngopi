@@ -106,6 +106,12 @@
                   <p>Pegawai</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="<?=base_url($this->session->userdata('level'))?>/pegawaioutsite" class="nav-link">
+                  <i class="fa fa-users nav-icon"></i>
+                  <p>PegawaiOutSite</p>
+                </a>
+              </li>
             </ul>
           </li>
           <?php } ?>
@@ -116,14 +122,7 @@
               <p> Absensi </p>
             </a>
           </li>
-          <?php if ($this->session->userdata('level') == 'admin') { ?>
-          <li class="nav-item">
-            <a href="<?=base_url($this->session->userdata('level'))?>/penggajian" class="nav-link">
-              <i class="nav-icon fas fa-university"></i>
-              <p> Penggajian </p>
-            </a>
-          </li>
-          <?php } ?>
+          
           <li class="nav-item">
             <a href="<?=base_url($this->session->userdata('level'))?>/cuti" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>

@@ -8,7 +8,7 @@
               <div class="inner">
                 <h3><?=$pegawai?></h3>
 
-                <p>Jumlah Karyawan</p> 
+                <p>Jumlah Karyawan Onsite</p> 
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -16,6 +16,22 @@
               <a href="<?=base_url('admin/pegawai')?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+          <!--ea -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3><?=$pegawaioutsite?></h3>
+
+                <p>Jumlah Karyawan Outsite</p> 
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="<?=base_url('admin/pegawaioutsite')?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ea -->
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -47,20 +63,7 @@
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3><?=$izin + $cuti?></h3>
-
-                <p>Karyawan Tidak Hadir</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
+          
           <!-- ./col -->
         </div>
         <!-- /.row -->
