@@ -18,7 +18,7 @@
                       <th>Keterangan</th>
                     </thead>
                     <tbody>
-                      <?php $no=2; foreach ($data as $d) { ?>
+                      <?php $no=1; foreach ($data as $d) { ?>
                       <tr>
                         <td width="1%"><?=$no++?></td>
                         <td><?=ucfirst($d->nama)?></td>

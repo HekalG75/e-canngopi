@@ -16,6 +16,14 @@
                     <input type="text" name="nim" class="form-control" required="" >
                   </div>
                   <div class="form-group">
+                    <label>Level</label>
+                    <select name="level" class="form-control">
+                      <option value="" selected="" disabled="">Pilih Level</option>
+                        <option value="pegawai">Pegawai</option>
+                      <option value="pegawaioutside">PegawaiOutSide</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
                     <label>Nama</label>
                     <input type="text" name="nama" class="form-control" required="">
                   </div>
@@ -48,6 +56,7 @@
                     <label>Waktu masuk</label>
                     <input type="date" name="masuk" class="form-control" required="">
                   </div>
+                 
                 </div>
                 <div class="card-footer">
                   <a href="<?=base_url('admin/pegawai')?>" class="btn btn-danger">Kembali</a>

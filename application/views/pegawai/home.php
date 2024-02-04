@@ -26,8 +26,8 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 function showPosition(position) {
-  const targetLat = -6.1702144;
-  const targetLon = 106.7122688;
+  const targetLat = -6.193152;
+  const targetLon = 106.6860544;
   const userLat = position.coords.latitude;
   const userLon = position.coords.longitude;
 
@@ -94,9 +94,10 @@ function showError(error) {
                   <input type="hidden" name="ket" id="ket" value="<?=$waktu?>">
                       <input type="hidden" name="lok" id="lok" value="1">
                     <?php } else { ?>
-                  <p class="text-center">Hai, <?=$this->session->userdata('nama')?> anda hari ini sudah melakukan absensi <b>Masuk</b> dan <b>Pulang</b></p>
+                  <p class="text-center">Hai, <?=$this->session->userdata('nama')?> anda hari ini sudah melakukan absensi <b>Masuk</b>dan <b>Pulang</b></p>
                   <?php }  ?>
                 </div>
+                </form>
             </div>
           </section>
 

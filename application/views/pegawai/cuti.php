@@ -6,9 +6,7 @@
           <section class="col-lg-12 connectedSortable">
             <div class="callout callout-info">
               <h5><i class="fas fa-info"></i> Note:</h5>
-              Izin Cuti hanya diberikan untuk pegawai yang sudah bekerja selama 1 tahun ( Tidak terpotong gaji )<br>
-              Izin Tidak masuk diberikan untuk siapa saja ( Dipotong gaji FULL ) <br>
-              Izin Sakit masuk diberikan untuk siapa saja dibuktikan dengan surat keterangan dokter ( Tidak terpotong gaji )
+             Jika anda berhalangan hadir karena sakit atau ada keperluan lain, anda bisa langsung mengajukan cuti pada menu "Tambah Data".
             </div>
             <!-- Map card -->
             <div class="card">

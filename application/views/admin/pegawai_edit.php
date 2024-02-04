@@ -16,6 +16,14 @@
                     <input type="text" name="nim" value="<?=$detail->nim?>" class="form-control" required="" readonly>
                   </div>
                   <div class="form-group">
+                    <label>Level</label>
+                    <select name="level" class="form-control">
+                      <option value="" selected="" disabled="">Pilih Level</option>
+                      <option value="pegawai">Pegawai</option>
+                      <option value="pegawaioutside">PegawaiOutSide</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
                     <label>Nama</label>
                     <input type="text" name="nama" value="<?=$detail->nama?>" class="form-control" required="">
                   </div>
@@ -48,8 +56,7 @@
                     <label>Waktu masuk</label>
                     <input type="date" name="masuk" value="<?=$detail->waktu_masuk?>" class="form-control" required="">
                   </div>
-                 
-                </div>
+                  
                 <div class="card-footer">
                   <a href="<?=base_url('admin/pegawai')?>" class="btn btn-danger">Kembali</a>
                   <button type="submit" class="btn btn-primary">Simpan</button>

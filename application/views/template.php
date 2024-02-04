@@ -106,12 +106,6 @@
                   <p>Pegawai</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="<?=base_url($this->session->userdata('level'))?>/pegawaioutsite" class="nav-link">
-                  <i class="fa fa-users nav-icon"></i>
-                  <p>PegawaiOutSite</p>
-                </a>
-              </li>
             </ul>
           </li>
           <?php } ?>

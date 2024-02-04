@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pegawaioutsite extends CI_Controller {
+class Pegawaioutside extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
 		$this->web = $this->db->get('web')->row();
-		if ($this->session->userdata('level') != 'pegawaioutsite') {
+		if ($this->session->userdata('level') != 'pegawaioutside') {
 			$this->session->set_flashdata('message', 'swal("Ops!", "Anda haru login sebagai pegawai", "error");');
 			redirect('auth');
 		}
@@ -24,7 +24,7 @@ class Pegawaioutsite extends CI_Controller {
 		else { $data['waktu'] = 'dilarang'; }
 		$data['web']	= $this->web;
 		$data['title']	= 'Dashboard';
-		$data['body']	= 'pegawaioutsite/home';
+		$data['body']	= 'pegawaioutside/home';
 		$this->load->view('template',$data);
 	}
 	//proses absen
@@ -42,41 +42,41 @@ class Pegawaioutsite extends CI_Controller {
 		} else {
 			$this->session->set_flashdata('message', 'swal("Gagal!", "Melakukan absen", "error");');
 		}
-		redirect('pegawaioutsite');
+		redirect('pegawaioutside');
 	}
 	//data absen
 	public function absensi()
 	{
 		$data['web']	= $this->web;
-		$data['data']	= $this->M_data->absensi_pegawaioutsite($this->session->userdata('nim'))->result();
+		$data['data']	= $this->M_data->absensi_pegawai($this->session->userdata('nim'))->result();
 		$data['title']	= 'Data Absen';
-		$data['body']	= 'pegawaioutsite/absen';
+		$data['body']	= 'pegawaioutside/absen';
 		$this->load->view('template',$data);
 	}
 	//CURD data cuti
 	public function cuti()
 	{
 		$data['web']	= $this->web;
-		$data['data']	= $this->M_data->cuti_pegawaioutsite($this->session->userdata('nim'))->result();
-		$pegawaioutsite = $this->M_data->pegawaiidoutsite($this->session->userdata('nim'))->row();
-		$dt1 = new DateTime($pegawaioutsite->waktu_masuk);
+		$data['data']	= $this->M_data->cuti_pegawai($this->session->userdata('nim'))->result();
+		$pegawai = $this->M_data->pegawaiid($this->session->userdata('nim'))->row();
+		$dt1 = new DateTime($pegawai->waktu_masuk);
 		$dt2 = new DateTime(date('Y-m-d'));
 		$d = $dt2->diff($dt1)->days + 1;
 		$data['bakti']	= $d;
 		$data['title']	= 'Data Permohonan Ketidakhadiran';
-		$data['body']	= 'pegawaioutsite/cuti';
+		$data['body']	= 'pegawaioutside/cuti';
 		$this->load->view('template',$data);
 	}
 	public function cuti_add()
 	{
 		$data['web']	= $this->web;
-		$pegawaioutsite = $this->M_data->pegawaiidoutsite($this->session->userdata('nim'))->row();
-		$dt1 = new DateTime($pegawaioutsite->waktu_masuk);
+		$pegawai = $this->M_data->pegawaiid($this->session->userdata('nim'))->row();
+		$dt1 = new DateTime($pegawai->waktu_masuk);
 		$dt2 = new DateTime(date('Y-m-d'));
 		$d = $dt2->diff($dt1)->days + 1;
 		$data['bakti']	= $d;
 		$data['title']	= 'Tambah Data Ketidakhadiran';
-		$data['body']	= 'pegawaioutsite/cuti_add';
+		$data['body']	= 'pegawaioutside/cuti_add';
 		$this->load->view('template',$data);
 	}
 	public function cuti_simpan()
@@ -98,7 +98,7 @@ class Pegawaioutsite extends CI_Controller {
 			
 			if ( ! $this->upload->do_upload('bukti')){
 				$this->session->set_flashdata('message', 'swal("Ops!", "Bukti gagal diupload", "erro");');
-				redirect('pegawaioutsite/cuti_add');
+				redirect('pegawaioutside/cuti_add');
 			}
 			else{
 				$img = $this->upload->data();
@@ -123,7 +123,7 @@ class Pegawaioutsite extends CI_Controller {
 
 		$this->db->trans_complete();
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Pengajuan cuti", "success");');
-		redirect('pegawaioutsite/cuti');
+		redirect('pegawaioutside/cuti');
 	}
 	public function cuti_update($id)
 	{
@@ -135,7 +135,21 @@ class Pegawaioutsite extends CI_Controller {
 		);
 		$this->db->update('cuti',$data,['id_cuti'=>$id]);
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Update pengajuan cuti", "success");');
-		redirect('pegawaioutsite/cuti');
+		redirect('pegawaioutside/cuti');
+	}
+	public function cuti_edit($id)
+	{
+		$data['web']	= $this->web;
+		$data['title']	= 'Update Data Cuti';
+		$data['data']	= $this->db->get_where('cuti',['id_cuti'=>$id])->row();
+		$data['body']	= 'pegawai/cuti_edit';
+		$this->load->view('template',$data);
+	}
+	public function cuti_delete($id)
+	{
+		$this->db->delete('cuti',['id_cuti'=>$id]);
+		$this->session->set_flashdata('message', 'swal("Berhasil!", "Delete pengajuan cuti", "success");');
+		redirect('pegawaioutside/cuti');
 	}
 	//update profile
 	public function profile()
@@ -157,7 +171,7 @@ class Pegawaioutsite extends CI_Controller {
 		$this->db->update('pegawai',['jenis_kelamin'=>$this->input->post('jenis_kelamin')],['nim'=>$id]);
 		$this->db->trans_complete();
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Update profile", "success");');
-		redirect('pegawaioutsite/profile');
+		redirect('pegawaioutside/profile');
 	}
 	public function ganti_password()
 	{
@@ -175,12 +189,12 @@ class Pegawaioutsite extends CI_Controller {
 			if (md5($p['pw_lama']) == $a->password) {
 				$this->db->update('user',['password'=>md5($p['pw_baru'])],['nim'=>$id]);
 				$this->session->set_flashdata('message', 'swal("Berhasil!", "Update password", "success");');
-				redirect('pegawaioutsite/ganti_password');
+				redirect('pegawaioutside/ganti_password');
 			}
 			else
 			{
 				$this->session->set_flashdata('message', 'swal("Ops!", "Password lama yang anda masukan salah", "error");');
-				redirect('pegawaioutsite/ganti_password');
+				redirect('pegawaioutside/ganti_password');
 			}
 		}
 		else
@@ -200,7 +214,7 @@ class Pegawaioutsite extends CI_Controller {
         $data['izin']  	= $this->M_data->izinbulan($this->session->userdata('nim'),$tahun,$bulan)->num_rows();
 		$data['web']	= $this->web;
 		$data['title']	= 'Slip Gaji';
-		$data['body']	= 'pegawaioutsite/slip';
+		$data['body']	= 'pegawaioutside/slip';
 		$this->load->view('template',$data);
 	}
 	public function print_slip()
@@ -214,6 +228,6 @@ class Pegawaioutsite extends CI_Controller {
         $data['izin']  	= $this->M_data->izinbulan($this->session->userdata('nim'),$tahun,$bulan)->num_rows();
 		$data['web']	= $this->web;
 		$data['title']	= 'Slip Gaji '.$this->session->userdata('nama');
-		$this->load->view('pegawaioutsite/slip_print',$data);
+		$this->load->view('pegawaioutside/slip_print',$data);
 	}
 }

@@ -19,7 +19,8 @@
                       <th>jenis kelamin</th>
                       <th>Jabatan</th>
                       <th>Waktu Masuk</th>
-                      
+                      <th>Level</th>
+                     
                       <th>Opsi</th>
                     </thead>
                     <tbody>
@@ -30,7 +31,8 @@
                         <td><?=ucfirst($d->nama)?></td>
                         <td><?=$d->jenis_kelamin?></td>
                         <td><?=ucfirst($d->departemen)?></td>
-                        <td><?=$this->M_data->tgl_indo(date('Y-m-d'),strtotime($d->waktu_masuk))?></td>
+                        <td><?=$d->waktu_masuk?></td>
+                        <td><?=$d->level?></td>
                         
                         <td>
                           <a href="<?=base_url('admin/pegawai_edit/'.$d->nim)?>" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span></a>

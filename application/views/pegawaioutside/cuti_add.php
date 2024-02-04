@@ -4,7 +4,7 @@
         <div class="row">
 
           <section class="col-lg-12 connectedSortable">
-            <form method="post" action="<?=base_url('pegawaioutsite/cuti_simpan')?>" enctype="multipart/form-data">
+            <form method="post" action="<?=base_url('pegawaioutside/cuti_simpan')?>" enctype="multipart/form-data">
             <!-- Map card -->
             <div class="card">
               <div class="card-header"> <?=$title?> </h3>
@@ -36,7 +36,7 @@
                 </div>
               </div>
               <div class="card-footer">
-                <a href="<?=base_url('pegawaioutsite/cuti')?>" class="btn btn-danger">Kembali</a>
+                <a href="<?=base_url('pegawai/curi')?>" class="btn btn-danger">Kembali</a>
                 <button class="btn btn-primary">Simpan</button>
               </div>
             </div>

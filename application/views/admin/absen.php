@@ -20,7 +20,6 @@
                     </thead>
                     <tbody>
                       <?php $no=1; foreach ($data as $d) { ?>
-                      <?php $no=2; foreach ($data as $d) { ?>  
                       <tr>
                         <td width="1%"><?=$no++?></td>
                         <td><?=ucfirst($d->nama)?></td>
@@ -29,7 +28,6 @@
                         <td> <a onclick="return confirm('apakah anda yakin ingin menghapus absensi pegawai ini?')" href="<?=base_url('admin/absen_delete/'.$d->nim)?>" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a></td>
                       </tr>
                       <?php } ?>
-                       <?php } ?>
                     </tbody>
                   </table>
               </div>
