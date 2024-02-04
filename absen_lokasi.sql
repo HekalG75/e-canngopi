@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 01 Feb 2024 pada 09.00
+-- Waktu pembuatan: 04 Feb 2024 pada 08.21
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `absen_lokasi`
+-- Database: `absen_lokasi_backup`
 --
 
 -- --------------------------------------------------------
@@ -39,8 +39,8 @@ CREATE TABLE `absen` (
 --
 
 INSERT INTO `absen` (`id_absen`, `nim`, `waktu`, `keterangan`) VALUES
-(131, '321', '2024-02-01 06:40:13', 'masuk'),
-(133, '123', '2024-02-01 06:55:16', 'masuk');
+(67, '2110102019', '2024-02-03 15:32:19', 'masuk'),
+(68, '2110102019', '2024-02-03 15:32:46', 'pulang');
 
 -- --------------------------------------------------------
 
@@ -63,7 +63,10 @@ CREATE TABLE `cuti` (
 --
 
 INSERT INTO `cuti` (`id_cuti`, `nim`, `jenis_cuti`, `bukti`, `alasan`, `status`, `waktu_pengajuan`) VALUES
-(28, '123', 'izin', NULL, 'ea', 'diajukan', '2024-02-01 07:36:31');
+(17, '2111', 'izin', NULL, 'malaz', 'diajukan', '2024-02-03 06:05:26'),
+(18, '2110', 'izin', NULL, 'malas', 'diajukan', '2024-02-03 06:06:00'),
+(19, '9923721823', 'izin', NULL, 'anjay', 'diajukan', '2024-02-03 06:36:04'),
+(20, '412312', 'izin', NULL, 'asw', 'diterima', '2024-02-03 06:37:10');
 
 -- --------------------------------------------------------
 
@@ -102,18 +105,10 @@ CREATE TABLE `detailcuti` (
 --
 
 INSERT INTO `detailcuti` (`id_detail`, `id_cuti`, `tanggal`) VALUES
-(20, 17, '2024-01-24'),
-(21, 18, '2024-01-25'),
-(22, 19, '2024-01-27'),
-(23, 20, '2024-01-27'),
-(24, 21, '2024-01-30'),
-(25, 22, '2024-02-01'),
-(26, 23, '2024-02-01'),
-(27, 24, '2024-02-01'),
-(28, 25, '2024-02-01'),
-(29, 26, '2024-02-01'),
-(30, 27, '2024-02-01'),
-(31, 28, '2024-02-01');
+(20, 17, '2024-02-03'),
+(21, 18, '2024-02-03'),
+(22, 19, '2024-02-03'),
+(23, 20, '2024-02-03');
 
 -- --------------------------------------------------------
 
@@ -125,38 +120,17 @@ CREATE TABLE `pegawai` (
   `nim` varchar(50) NOT NULL,
   `jenis_kelamin` enum('L','P') NOT NULL,
   `waktu_masuk` date NOT NULL,
-  `id_departemen` int(11) NOT NULL
+  `id_departemen` int(11) NOT NULL,
+  `level` enum('admin','pegawai','pegawaioutside') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `pegawai`
 --
 
-INSERT INTO `pegawai` (`nim`, `jenis_kelamin`, `waktu_masuk`, `id_departemen`) VALUES
-('123', 'L', '2024-01-31', 6),
-('99999', 'L', '2024-01-31', 6);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `pegawaioutsite`
---
-
-CREATE TABLE `pegawaioutsite` (
-  `nim` varchar(50) NOT NULL,
-  `jenis_kelamin` enum('L','P') NOT NULL,
-  `waktu_masuk` date NOT NULL,
-  `id_departemen` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `pegawaioutsite`
---
-
-INSERT INTO `pegawaioutsite` (`nim`, `jenis_kelamin`, `waktu_masuk`, `id_departemen`) VALUES
-('321', 'L', '2024-01-31', 6),
-('4231', 'L', '2024-01-31', 2),
-('912', 'L', '2024-01-31', 6);
+INSERT INTO `pegawai` (`nim`, `jenis_kelamin`, `waktu_masuk`, `id_departemen`, `level`) VALUES
+('2110102018', 'L', '2024-02-03', 2, 'pegawai'),
+('2110102019', 'P', '2024-02-03', 2, 'pegawaioutside');
 
 -- --------------------------------------------------------
 
@@ -169,7 +143,7 @@ CREATE TABLE `user` (
   `nama` varchar(254) NOT NULL,
   `email` varchar(254) NOT NULL,
   `password` varchar(254) NOT NULL,
-  `level` enum('admin','pegawai','pegawaioutsite') NOT NULL,
+  `level` enum('admin','pegawai','pegawaioutside') NOT NULL,
   `nim` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -178,32 +152,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `nama`, `email`, `password`, `level`, `nim`) VALUES
-(1, 'Haikal', 'admin@admin.com', '202cb962ac59075b964b07152d234b70', 'admin', NULL),
-(38, 'useronsite', 'useron@gmail.com', '6ad14ba9986e3615423dfca256d04e3f', 'pegawai', '123');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `useroutsite`
---
-
-CREATE TABLE `useroutsite` (
-  `user_id` int(11) NOT NULL,
-  `nama` varchar(254) NOT NULL,
-  `email` varchar(254) NOT NULL,
-  `password` varchar(254) NOT NULL,
-  `level` enum('admin','pegawai','pegawaioutsite') NOT NULL,
-  `nim` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `useroutsite`
---
-
-INSERT INTO `useroutsite` (`user_id`, `nama`, `email`, `password`, `level`, `nim`) VALUES
-(7, 'useroutsite', 'userout@gmail.com', '6ad14ba9986e3615423dfca256d04e3f', 'pegawaioutsite', '321'),
-(8, 'haikal', 'haikal@gmail.com', '539760b3222370b2754cbac577b2fc31', 'pegawaioutsite', '912'),
-(9, 'hekral', 'hekral@gmail.com', '539760b3222370b2754cbac577b2fc31', 'pegawaioutsite', '4231');
+(1, 'Administrator', 'admin@admin.com', '202cb962ac59075b964b07152d234b70', 'admin', NULL),
+(37, 'useronsite', 'useron@gmail.com', '6ad14ba9986e3615423dfca256d04e3f', 'pegawai', '2110102018'),
+(39, 'useroutside', 'userout@gmail.com', '6ad14ba9986e3615423dfca256d04e3f', 'pegawaioutside', '2110102019');
 
 -- --------------------------------------------------------
 
@@ -214,15 +165,19 @@ INSERT INTO `useroutsite` (`user_id`, `nama`, `email`, `password`, `level`, `nim
 CREATE TABLE `web` (
   `id_web` int(11) NOT NULL,
   `logo` varchar(254) NOT NULL,
-  `nama` varchar(254) NOT NULL
+  `nama` varchar(254) NOT NULL,
+  `author` varchar(254) NOT NULL,
+  `alamat` text NOT NULL,
+  `nohp` varchar(20) NOT NULL,
+  `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `web`
 --
 
-INSERT INTO `web` (`id_web`, `logo`, `nama`) VALUES
-(1, 'canngopilogo.png', 'E - CanNgopi');
+INSERT INTO `web` (`id_web`, `logo`, `nama`, `author`, `alamat`, `nohp`, `email`) VALUES
+(1, 'canngopilogo.png', 'E - CanNgopi', 'Muhammad Haikal', 'Kelapa dua no 2 tangerang banten', '089503725636', 'Haikal@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -259,21 +214,9 @@ ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`nim`);
 
 --
--- Indeks untuk tabel `pegawaioutsite`
---
-ALTER TABLE `pegawaioutsite`
-  ADD PRIMARY KEY (`nim`);
-
---
 -- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`);
-
---
--- Indeks untuk tabel `useroutsite`
---
-ALTER TABLE `useroutsite`
   ADD PRIMARY KEY (`user_id`);
 
 --
@@ -290,13 +233,13 @@ ALTER TABLE `web`
 -- AUTO_INCREMENT untuk tabel `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT untuk tabel `cuti`
 --
 ALTER TABLE `cuti`
-  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT untuk tabel `departemen`
@@ -308,19 +251,13 @@ ALTER TABLE `departemen`
 -- AUTO_INCREMENT untuk tabel `detailcuti`
 --
 ALTER TABLE `detailcuti`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
-
---
--- AUTO_INCREMENT untuk tabel `useroutsite`
---
-ALTER TABLE `useroutsite`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT untuk tabel `web`
