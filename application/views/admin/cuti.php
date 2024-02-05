@@ -19,6 +19,7 @@
                       <th>Keterangan</th>
                       <th>Status</th>
                       <th>Opsi</th> 
+                      <th>Alasan Penolakan</th>
                     </thead>
                     <tbody>
                       <?php $no=1; foreach ($data as $d) { 
@@ -39,16 +40,43 @@
                         <td>
                           <?php if ($d->status == 'diajukan') { ?>
                           <a onclick="return confirm('apakah anda yakin ingin menerima pengajuan cuti ini?')" href="<?=base_url('admin/cuti_terima/'.$d->id_cuti)?>" class="btn btn-primary btn-sm"><span class="fa fa-check"></span></a>
-                          <a onclick="return confirm('apakah anda yakin ingin menolak pengajuan cuti ini?')" href="<?=base_url('admin/cuti_tolak/'.$d->id_cuti)?>" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
+                          <!-- Tambahkan modal untuk memasukkan alasan penolakan -->
+                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#alasanModal<?=$d->id_cuti?>"><span class="fa fa-trash"></span></button>
+
                           <?php } ?>
                            <?php if ($d->status == 'diterima') { ?>
                             <button class="btn btn-primary btn-sm">Anda menerima pengajuan</button>
                           <?php } ?>
                           <?php if ($d->status == 'ditolak') { ?>
                             <button class="btn btn-danger btn-sm">Anda menolak pengajuan</button>
+                            <br>
+                            <strong>Alasan Penolakan:</strong> <?=$d->alasan_penolakan?> <!-- Menampilkan alasan penolakan -->
                           <?php } ?>
                         </td>
                       </tr>
+                      <!-- Tambahkan modal -->
+                        <div class="modal fade" id="alasanModal<?=$d->id_cuti?>" tabindex="-1" role="dialog" aria-labelledby="alasanModalLabel<?=$d->id_cuti?>" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="alasanModalLabel<?=$d->id_cuti?>">Masukkan Alasan Penolakan</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form action="<?=base_url('admin/cuti_tolak')?>" method="post">
+                                  <input type="hidden" name="id_cuti" value="<?=$d->id_cuti?>">
+                                  <div class="form-group">
+                                    <label for="alasan_penolakan">Alasan Penolakan:</label>
+                                    <textarea class="form-control" name="alasan_penolakan" required></textarea>
+                                  </div>
+                                  <button type="submit" class="btn btn-danger">Kirim</button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       <?php } ?>
                     </tbody>
                   </table>

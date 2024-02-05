@@ -23,6 +23,7 @@
                       <th>Keterangan</th>
                       <th>Status</th>
                       <th>Status Pengajuan</th>
+                      <th>Alasan Penolakan</th>
                     </thead>
                     <tbody>
                       <?php $no=1; foreach ($data as $d) { 
