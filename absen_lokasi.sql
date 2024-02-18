@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Feb 2024 pada 17.14
+-- Waktu pembuatan: 18 Feb 2024 pada 19.07
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -35,16 +35,6 @@ CREATE TABLE `absen` (
   `catatan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `absen`
---
-
-INSERT INTO `absen` (`id_absen`, `nim`, `waktu`, `keterangan`, `catatan`) VALUES
-(120, '2110102018', '2024-02-10 15:53:33', 'masuk', ''),
-(121, '2110102018', '2024-02-10 15:53:46', 'pulang', 'hari ini oshi gw grad :('),
-(122, 'hekal', '2024-02-10 15:55:46', 'masuk', ''),
-(123, 'hekal', '2024-02-10 15:55:57', 'pulang', 'anjay');
-
 -- --------------------------------------------------------
 
 --
@@ -66,7 +56,7 @@ CREATE TABLE `cuti` (
 --
 
 INSERT INTO `cuti` (`id_cuti`, `nim`, `jenis_cuti`, `bukti`, `alasan`, `status`, `waktu_pengajuan`) VALUES
-(27, '2110102019', 'sakit', 'auth-image.jpg', 'sakit', 'ditolak', '2024-02-10 16:03:33');
+(31, '2110102019', 'izin', NULL, 'fasfa', 'diterima', '2024-02-18 06:12:05');
 
 -- --------------------------------------------------------
 
@@ -86,7 +76,7 @@ CREATE TABLE `departemen` (
 INSERT INTO `departemen` (`departemen_id`, `departemen`) VALUES
 (1, 'Keuangan'),
 (2, 'Administrasi'),
-(6, 'Kitchen');
+(7, 'kicken');
 
 -- --------------------------------------------------------
 
@@ -115,7 +105,11 @@ INSERT INTO `detailcuti` (`id_detail`, `id_cuti`, `tanggal`) VALUES
 (27, 24, '2024-02-09'),
 (28, 25, '2024-02-10'),
 (29, 26, '2024-02-10'),
-(30, 27, '2024-02-10');
+(30, 27, '2024-02-10'),
+(31, 28, '2024-02-14'),
+(32, 29, '2024-02-18'),
+(33, 30, '2024-02-18'),
+(34, 31, '2024-02-18');
 
 -- --------------------------------------------------------
 
@@ -136,9 +130,22 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`nim`, `jenis_kelamin`, `waktu_masuk`, `id_departemen`, `level`) VALUES
+('1', 'L', '2024-02-10', 2, 'pegawaioutside'),
+('10', 'L', '2024-02-11', 6, 'pegawaioutside'),
+('11', 'L', '2024-02-11', 7, 'pegawaioutside'),
+('123123321', 'L', '2024-02-14', 2, 'pegawaioutside'),
+('2', 'P', '2024-02-10', 2, 'pegawaioutside'),
 ('2110102018', 'L', '2024-02-03', 2, 'pegawai'),
 ('2110102019', 'P', '2024-02-03', 2, 'pegawaioutside'),
-('hekal', 'L', '2024-02-10', 6, 'pegawaioutside');
+('2233', 'L', '2024-02-11', 7, 'pegawaioutside'),
+('26', 'L', '2024-02-11', 2, 'pegawaioutside'),
+('3', 'L', '2024-02-10', 1, 'pegawaioutside'),
+('4', 'P', '2024-02-10', 2, 'pegawaioutside'),
+('5', 'L', '2024-02-11', 2, 'pegawaioutside'),
+('6', 'L', '2024-02-11', 2, 'pegawaioutside'),
+('7', 'L', '2024-02-11', 2, 'pegawaioutside'),
+('8', 'L', '2024-02-22', 6, 'pegawaioutside'),
+('9', 'P', '2024-02-11', 2, 'pegawaioutside');
 
 -- --------------------------------------------------------
 
@@ -163,7 +170,9 @@ INSERT INTO `user` (`user_id`, `nama`, `email`, `password`, `level`, `nim`) VALU
 (1, 'Administrator', 'admin@admin.com', '202cb962ac59075b964b07152d234b70', 'admin', NULL),
 (37, 'useronsite', 'useron@gmail.com', '6ad14ba9986e3615423dfca256d04e3f', 'pegawai', '2110102018'),
 (39, 'useroutside', 'userout@gmail.com', '6ad14ba9986e3615423dfca256d04e3f', 'pegawaioutside', '2110102019'),
-(40, 'hekal', 'hekal@gmail.com', '539760b3222370b2754cbac577b2fc31', 'pegawaioutside', 'hekal');
+(52, 'haikal', 'haikal@gmail.com', '539760b3222370b2754cbac577b2fc31', 'admin', ''),
+(53, 'anjay', 'anjay@gmail.com', 'de12f5798f86bdcc5c759a645e913e4c', 'pegawaioutside', '2233'),
+(54, 'hekal', 'hekal@gmail.com', '539760b3222370b2754cbac577b2fc31', 'pegawaioutside', '123123321');
 
 -- --------------------------------------------------------
 
@@ -242,31 +251,31 @@ ALTER TABLE `web`
 -- AUTO_INCREMENT untuk tabel `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
 -- AUTO_INCREMENT untuk tabel `cuti`
 --
 ALTER TABLE `cuti`
-  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT untuk tabel `departemen`
 --
 ALTER TABLE `departemen`
-  MODIFY `departemen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `departemen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `detailcuti`
 --
 ALTER TABLE `detailcuti`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT untuk tabel `web`
