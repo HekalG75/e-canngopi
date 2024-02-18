@@ -46,7 +46,7 @@
                             <button class="btn btn-primary btn-sm">Pengajuan anda diterima</button>
                           <?php } ?>
                           <?php if ($d->status == 'ditolak') { ?>
-                            <button class="btn btn-danger btn-sm">Pengajuan anda ditolak</button>
+                            <button class="btn btn-danger btn-sm">Anda sudah banyak cuti</button>
                           <?php } ?>
                         </td>
                       </tr>

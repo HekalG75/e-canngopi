@@ -36,9 +36,17 @@ class M_data extends CI_Model {
 		$this->db->from('absen');
 		$this->db->join('pegawai','absen.nim = pegawai.nim');
 		$this->db->join('user','pegawai.nim = user.nim');
-		$this->db->order_by('absen.waktu','desc');
+		$this->db->order_by('absen.waktu','desc','catatan');
 		return $this->db->get();
 	}
+	public function hapus_semua_data() {
+        // Lakukan penghapusan semua data dari tabel absen
+        $this->db->empty_table('absen'); // Gantilah 'nama_tabel_absen' dengan nama tabel absen Anda
+        
+        // Atau, jika Anda ingin melakukan penghapusan satu persatu baris data
+        // $this->db->truncate('nama_tabel_absen');
+    }
+	
 	public function absensi_pegawai($id)
 	{
 		$this->db->select('*');
@@ -46,7 +54,7 @@ class M_data extends CI_Model {
 		$this->db->join('pegawai','absen.nim = pegawai.nim');
 		$this->db->join('user','pegawai.nim = user.nim');
 		$this->db->where('pegawai.nim',$id);
-		$this->db->order_by('absen.waktu','desc');
+		$this->db->order_by('absen.waktu','desc','catatan');
 		return $this->db->get();
 	}
 	public function cuti()
@@ -68,6 +76,10 @@ class M_data extends CI_Model {
 		$this->db->order_by('cuti.id_cuti','desc');
 		return $this->db->get();
 	}
+	public function hapus_semua_cuti() {
+        
+        $this->db->empty_table('cuti'); 
+    }
 	public function laporan($bulan)
 	{
 		$this->db->select('*');

@@ -28,22 +28,28 @@ class Pegawai extends CI_Controller {
 		$this->load->view('template',$data);
 	}
 	//proses absen
-	public function proses_absen()
-	{
-		$id = $this->session->userdata('nim');
-		$p = $this->input->post();
-		$data = [
-			'nim'	=> $id,
-			'keterangan' => $p['ket']
-		];
-		if($p['lok'] == '1'){
-			$this->db->insert('absen',$data);
-			$this->session->set_flashdata('message', 'swal("Berhasil!", "Melakukan absen", "success");');
-		} else {
-			$this->session->set_flashdata('message', 'swal("Gagal!", "Melakukan absen", "error");');
-		}
-		redirect('pegawai');
-	}
+public function proses_absen()
+{
+    $id = $this->session->userdata('nim');
+    $p = $this->input->post();
+    $data = [
+        'nim'       => $id,
+        'keterangan' => $p['ket']
+    ];
+
+    // Tambahkan catatan jika ada
+    if (isset($p['catatan'])) {
+        $data['catatan'] = $p['catatan'];
+    }
+
+    if ($p['lok'] == '1') {
+        $this->db->insert('absen', $data);
+        $this->session->set_flashdata('message', 'swal("Berhasil!", "Melakukan absen", "success");');
+    } else {
+        $this->session->set_flashdata('message', 'swal("Gagal!", "Melakukan absen", "error");');
+    }
+    redirect('pegawai');
+}
 	//data absen
 	public function absensi()
 	{

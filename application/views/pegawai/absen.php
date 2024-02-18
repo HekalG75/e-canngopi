@@ -16,6 +16,7 @@
                       <th>Nama</th>
                       <th>Waktu</th>
                       <th>Keterangan</th>
+                      <th>Catatan</th>
                     </thead>
                     <tbody>
                       <?php $no=1; foreach ($data as $d) { ?>
@@ -24,6 +25,7 @@
                         <td><?=ucfirst($d->nama)?></td>
                         <td><?=ucfirst($d->waktu)?></td>
                         <td><?=ucfirst($d->keterangan)?></td>
+                        <td><?=ucfirst($d->catatan)?></td>
                       </tr>
                       <?php } ?>
                     </tbody>

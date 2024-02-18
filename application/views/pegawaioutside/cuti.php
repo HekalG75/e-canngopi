@@ -23,7 +23,6 @@
                       <th>Keterangan</th>
                       <th>Status</th>
                       <th>Status Pengajuan</th>
-                      <th>Alasan Penolakan</th>
                     </thead>
                     <tbody>
                       <?php $no=1; foreach ($data as $d) { 
@@ -47,7 +46,9 @@
                             <button class="btn btn-primary btn-sm">Pengajuan anda diterima</button>
                           <?php } ?>
                           <?php if ($d->status == 'ditolak') { ?>
-                            <button class="btn btn-danger btn-sm">Pengajuan anda ditolak</button>
+                            <button class="btn btn-danger btn-sm">Anda sudah banyak cuti</button>
+                            <br>
+                            
                           <?php } ?>
                         </td>
                       </tr>

@@ -165,6 +165,14 @@ class Admin extends CI_Controller {
 		$data['body']	= 'admin/absen';
 		$this->load->view('template',$data);
 	}
+	public function hapus_semua() {
+        // Lakukan penghapusan semua data dari tabel absen
+        $this->load->model('M_data'); // Sesuaikan dengan nama model absen Anda
+        $this->M_data->hapus_semua_data(); // Panggil method hapus_semua_data dari model
+        
+        // Setelah penghapusan selesai, redirect ke halaman yang sesuai atau tampilkan pesan sukses
+        redirect('admin/absensi'); // Sesuaikan dengan halaman yang ingin Anda arahkan setelah penghapusan
+    }
 	public function absen_delete($id)
 	{
    		 $this->db->trans_start();
@@ -175,6 +183,7 @@ class Admin extends CI_Controller {
     	$this->session->set_flashdata('message', 'swal("Berhasil!", "Delete Data absensi", "success");');
     redirect('admin/absensi');
 	}
+	
 	//Data pengajuan cuti
 	public function cuti()
 	{
@@ -196,6 +205,14 @@ class Admin extends CI_Controller {
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Menolak pengajuan cuti", "success");');
 		redirect('admin/cuti');
 	}
+	public function hapus_cuti() {
+        // Lakukan penghapusan semua data dari tabel absen
+        $this->load->model('M_data'); // Sesuaikan dengan nama model absen Anda
+        $this->M_data->hapus_semua_cuti(); // Panggil method hapus_semua_data dari model
+        
+        // Setelah penghapusan selesai, redirect ke halaman yang sesuai atau tampilkan pesan sukses
+        redirect('admin/cuti'); // Sesuaikan dengan halaman yang ingin Anda arahkan setelah penghapusan
+    }
 	//laporan bulanan
 	function laporan(){
 		 function bulan($bln){
