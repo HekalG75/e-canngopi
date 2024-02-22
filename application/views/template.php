@@ -67,10 +67,13 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="info">
-          <a href="<?=base_url('admin/profile')?>" class="d-block"><small>User login :</small><br> <b><?=$this->session->userdata('nama')?> ( <?=$this->session->userdata('level')?> )</b></a>
-        </div>
-      </div>
+    <div class="info">
+        <a href="<?=base_url('admin/profile')?>" onclick="return false;" class="d-block">
+            <small>User login :</small><br>
+            <b><?=$this->session->userdata('nama')?> ( <?=$this->session->userdata('level')?> )</b>
+        </a>
+    </div>
+</div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -230,7 +233,7 @@
     $('#myTable').DataTable( {
         dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+             'csv', 'excel', 'print'
         ]
     } );
 } );

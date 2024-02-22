@@ -23,14 +23,7 @@
                     <label>Email</label>
                     <input type="email" name="email" class="form-control" required="" value="<?=$data->email?>">
                   </div>
-                  <div class="form-group">
-                    <label>Jenis Kelamin</label>
-                    <select name="jenis_kelamin" class="form-control">
-                      <option value="" selected="" disabled="">Pilih Jenis Kelamin</option>
-                      <option <?php if ($data->jenis_kelamin == 'L') {echo 'selected'; }?> value="L">Laki-Laki</option>
-                      <option <?php if ($data->jenis_kelamin == 'P') {echo 'selected'; }?> value="P">Perempuan</option>
-                    </select>
-                  </div>
+                  
                 </div>
               </div>
               <div class="card-footer">

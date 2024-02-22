@@ -309,43 +309,6 @@ class Admin extends CI_Controller {
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Update profile", "success");');
 		redirect('admin/profile');
 	}
-	public function ganti_password()
-	{
-		$data['web']	= $this->web;
-		$data['title']	= 'Ganti Password';
-		$data['body']	= 'admin/ganti password';
-		$this->load->view('template',$data);
-	}
-	public function password_update($id)
-	{
-		$p = $this->input->post();
-		$cek = $this->db->get_where('user',['user_id'=>$id]);
-		if ($cek->num_rows() > 0) {
-			$a = $cek->row();
-			if (md5($p['pw_lama']) == $a->password) {
-				$this->db->update('user',['password'=>md5($p['pw_baru'])],['user_id'=>$id]);
-				$this->session->set_flashdata('message', 'swal("Berhasil!", "Update password", "success");');
-				redirect('admin/ganti_password');
-			}
-			else
-			{
-				$this->session->set_flashdata('message', 'swal("Ops!", "Password lama yang anda masukan salah", "error");');
-				redirect('admin/ganti_password');
-			}
-		}
-		else
-		{
-			$this->session->set_flashdata('message', 'swal("Ops!", "Anda harus login", "error");');
-				redirect('auth');
-		}
-	}
-	//penggajian
-	public function penggajian()
-	{
-		$data['list']	= $this->M_data->pegawai()->result();
-		$data['web']	= $this->web;
-		$data['title']	= 'Penggajian Karyawan';
-		$data['body']	= 'admin/penggajian';
-		$this->load->view('template',$data);
-	}
+	
+	
 }
