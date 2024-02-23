@@ -19,8 +19,8 @@
                     <label>Level</label>
                     <select name="level" class="form-control">
                       <option value="" selected="" disabled="">Pilih Level</option>
-                      <option value="pegawai">Pegawai</option>
-                      <option value="pegawaioutside">PegawaiOutSide</option>
+                      <option <?php if ($detail->level == 'pegawai') {echo 'selected'; }?> value="pegawai">Pegawai</option>
+                      <option <?php if ($detail->level == 'pegawaioutside') {echo 'selected'; }?> value="pegawaioutside">PegawaiOutSide</option>
                     </select>
                   </div>
                   <div class="form-group">
