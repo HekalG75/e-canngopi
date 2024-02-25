@@ -6,7 +6,7 @@ class Auth extends CI_Controller {
     public function index()
     {
         $data['web'] = $this->db->get('web')->row();
-        $this->load->view('login', $data);
+        $this->load->view('masuk_', $data);
     }
 
     public function aksi_login()

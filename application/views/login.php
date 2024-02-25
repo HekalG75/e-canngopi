@@ -35,7 +35,7 @@
                     </div>
                     <div class="div">
                         <h5>Email</h5>
-                         <input type="email" class="form-control" name="email" required="" >
+                         <input type="email" class="form-control" name="email" required=""  >
                     </div>
                 </div>
                 <div class="input-div pass">
