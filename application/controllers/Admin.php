@@ -155,7 +155,10 @@ class Admin extends CI_Controller {
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Delete Data Pegawai", "success");');
 		redirect('admin/pegawai');
 	}
+
 	//end CURD pegawai
+	//filter data absen
+	
 	//Data Absensi
 	public function absensi()
 	{

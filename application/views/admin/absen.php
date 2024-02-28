@@ -13,10 +13,12 @@
               <div class="card-body table-responsive">
                 <table id="myTable" class="table table-bordered table-striped text-center">
                     <thead>
+
                       <!-- Tombol hapus semua data absen -->
           <a onclick="return confirm('Apakah Anda yakin ingin menghapus semua data absensi?')" href="<?=base_url('admin/hapus_semua')?>" class="btn btn-danger btn-sm float-right"><span class="fa fa-trash"></span> Hapus Semua Data</a>
         </div>
-                      <th>No</th>
+
+                      <th>No</th> 
                       <th>Nama</th>
                       <th>Waktu</th>
                       <th>Keterangan</th>

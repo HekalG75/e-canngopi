@@ -30,13 +30,18 @@
     <div class="container-login100">
       <div class="wrap-login100">
         <div class="login100-pic js-tilt" data-tilt>
-          <img src="assets/images/img-02.png" alt="IMG">
+          <img src="assets/images/img-03.png" alt="IMG">
         </div>
         
         <form action="<?=base_url('auth/aksi_login')?>" method="post" class="login100-form validate-form">
+          <div class="logo-container" style="text-align: center;">
+    <img src="assets/images/img-02.png" style="width: 100px; height: 100px; display: inline-block;" >
+</div>
+<br>
           <span class="login100-form-title">
-            E-Canngopi
-          </span>
+        E-Canngopi
+    </span>
+    
 
           <div class="wrap-input100">
             <input class="input100" type="email" class="form-control" name="email" placeholder="Email">
@@ -100,5 +105,8 @@
     <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
     <script src="<?php echo base_url('assets/') ?>alert.js"></script>
     <?php echo "<script>".$this->session->flashdata('message')."</script>"?>
+
+    
+
 </body>
 </html>

@@ -57,6 +57,7 @@ class M_data extends CI_Model {
 		$this->db->order_by('absen.waktu','desc','catatan');
 		return $this->db->get();
 	}
+
 	public function cuti()
 	{
 		$this->db->select('*');
