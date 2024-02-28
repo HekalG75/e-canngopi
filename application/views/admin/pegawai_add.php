@@ -21,6 +21,7 @@
                       <option value="" selected="" disabled="">Pilih Level</option>
                         <option value="pegawai">Pegawai</option>
                       <option value="pegawaioutside">PegawaiOutSide</option>
+                      <option value="admin">Admin</option>
                     </select>
                   </div>
                   <div class="form-group">
