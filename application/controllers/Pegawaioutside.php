@@ -6,6 +6,7 @@ class Pegawaioutside extends CI_Controller {
 	{
 		parent::__construct();
 		$this->web = $this->db->get('web')->row();
+		$this->load->library('form_validation');
 		if ($this->session->userdata('level') != 'pegawaioutside') {
 			$this->session->set_flashdata('message', 'swal("Ops!", "Anda haru login sebagai pegawai", "error");');
 			redirect('auth');
@@ -26,6 +27,67 @@ class Pegawaioutside extends CI_Controller {
 		$data['title']	= 'Dashboard';
 		$data['body']	= 'pegawaioutside/home';
 		$this->load->view('template',$data);
+
+	}
+
+public function revisi_absen()
+	{
+		$data['web']	= $this->web;
+		$data['data']	= $this->M_data->revisi_simpan($this->session->userdata('nim'))->result();
+		$pegawai = $this->M_data->pegawaiid($this->session->userdata('nim'))->row();
+		$data['title']	= 'Revisi Absen';
+		$data['body']	= 'pegawaioutside/revisi_absen';
+		$this->load->view('template',$data);
+	}
+public function revisi_add()
+	{
+		$data['web']	= $this->web;
+		$pegawai = $this->M_data->pegawaiid($this->session->userdata('nim'))->row();
+		$data['title']	= 'Tambah Data Revisi Absen';
+		$data['body']	= 'pegawaioutside/revisi_add';
+		$this->load->view('template',$data);
+	}
+
+	public function revisi_simpan()
+	{
+		$this->db->trans_start();
+		$data = array(
+			'nim'			=> $this->session->userdata('nim'),
+			'keterangan'		=> $this->input->post('keterangan'),
+			'status'		=> 'diajukan'
+		);
+		
+		$this->db->insert('revisi_absen',$data);
+		$cek = $this->db->query(" select * from revisi_absen order by id_revisi desc limit 1 ")->row();
+		$dt1 = new DateTime($this->input->post('mulai'));
+		$dt2 = new DateTime($this->input->post('akhir'));
+		$jml = $dt2->diff($dt1)->days + 1;
+		$tgl1= $this->input->post('mulai');
+		$no  = 1;
+		for ($i=0; $i < $jml ; $i++) { 
+			$insert = array(
+				'id_revisi' => $cek->id_revisi,
+				'tanggal' => date('Y-m-d', strtotime('+'.$i.' days', strtotime($tgl1))),
+			);
+			$this->db->insert('detailrevisi',$insert);
+		}
+
+		$this->db->trans_complete();
+		$this->session->set_flashdata('message', 'swal("Berhasil!", "Pengajuan revisi", "success");');
+		redirect('pegawaioutside/revisi_absen');
+	}
+
+	public function revisi_update($id)
+	{
+		$data = array(
+			'nim'	=> $this->session->userdata('nim'),
+			'mulai'	=> $this->input->post('mulai'),
+			'akhir'	=> $this->input->post('akhir'),
+			'keterangan'=> $this->input->post('keterangan')
+		);
+		$this->db->update('revisi_absen',$data,['id_revisi'=>$id]);
+		$this->session->set_flashdata('message', 'swal("Berhasil!", "Update pengajuan cuti", "success");');
+		redirect('pegawaioutside/revisi');
 	}
 	//proses absen
 public function proses_absen()
@@ -38,9 +100,18 @@ public function proses_absen()
     ];
 
     // Tambahan catatan 
-    if (isset($p['catatan'])) {
-        $data['catatan'] = $p['catatan'];
-    }
+if (isset($p['kegiatanhariini'])) {
+    $data['kegiatanhariini'] = $p['kegiatanhariini'];
+}
+if (isset($p['kendala'])) {
+    $data['kendala'] = $p['kendala'];
+}
+if (isset($p['mengatasi'])) {
+    $data['mengatasi'] = $p['mengatasi'];
+}
+if (isset($p['kegiatanberikut'])) {
+    $data['kegiatanberikut'] = $p['kegiatanberikut'];
+}
 
     if ($p['lok'] == '1') {
         $this->db->insert('absen', $data);

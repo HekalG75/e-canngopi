@@ -27,6 +27,26 @@ class Pegawai extends CI_Controller {
 		$data['body']	= 'pegawai/home';
 		$this->load->view('template',$data);
 	}
+
+
+	public function revisi_absen()
+	{
+		$data['web']	= $this->web;
+		$data['data']	= $this->M_data->lupa_absen($this->session->userdata('nim'))->result();
+		$pegawai = $this->M_data->pegawaiid($this->session->userdata('nim'))->row();
+		$data['title']	= 'Revisi Absen';
+		$data['body']	= 'pegawai/revisi_absen';
+		$this->load->view('template',$data);
+	}
+
+	public function revisi_add()
+	{
+		$data['web']	= $this->web;
+		$pegawai = $this->M_data->pegawaiid($this->session->userdata('nim'))->row();
+		$data['title']	= 'Tambah Data Revisi Absen';
+		$data['body']	= 'pegawai/revisi_add';
+		$this->load->view('template',$data);
+	}
 	//proses absen
 public function proses_absen()
 {
@@ -37,10 +57,19 @@ public function proses_absen()
         'keterangan' => $p['ket']
     ];
 
-    // Tambahkan catatan jika ada
-    if (isset($p['catatan'])) {
-        $data['catatan'] = $p['catatan'];
-    }
+    // Tambahan catatan 
+if (isset($p['kegiatanhariini'])) {
+    $data['kegiatanhariini'] = $p['kegiatanhariini'];
+}
+if (isset($p['kendala'])) {
+    $data['kendala'] = $p['kendala'];
+}
+if (isset($p['mengatasi'])) {
+    $data['mengatasi'] = $p['mengatasi'];
+}
+if (isset($p['kegiatanberikut'])) {
+    $data['kegiatanberikut'] = $p['kegiatanberikut'];
+}
 
     if ($p['lok'] == '1') {
         $this->db->insert('absen', $data);

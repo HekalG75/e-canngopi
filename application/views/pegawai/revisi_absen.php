@@ -4,24 +4,25 @@
         <div class="row">
 
           <section class="col-lg-12 connectedSortable">
-
+            <div class="callout callout-info">
+              <h5><i class="fas fa-info"></i> Note:</h5>
+              Jika anda lupa absen hari sebelumnya, anda bisa langsung mengajukan revisi absen pada menu "Tambah Data".
+            </div>
             <!-- Map card -->
             <div class="card">
               <div class="card-header"> <?=$title?> </h3>
+                  <a style="float: right;" href="<?=base_url('pegawai/revisi_add')?>" class="btn btn-sm btn-primary">Tambah data</a>
               </div>
               <div class="card-body table-responsive">
-                <table id="myTable" class="table table-bordered table-striped text-center">
+                <table id="table" class="table table-bordered table-striped text-center">
                     <thead>
-                       <!-- Tombol hapus semua data absen -->
-                        <a onclick="return confirm('Apakah Anda yakin ingin menghapus semua data Revisi?')" href="<?=base_url('admin/hapus_cuti')?>" class="btn btn-danger btn-sm float-right"><span class="fa fa-trash"></span> Hapus Semua Data</a>
-                      </div>
                       <th width="1%">No</th>
                       <th>Nama</th>
                       <th>Jenis</th>
                       <th>Waktu</th>
                       <th>Keterangan</th>
                       <th>Status</th>
-                      <th>Opsi</th> 
+                      <th>Status Pengajuan</th>
                     </thead>
                     <tbody>
                       <?php $no=1; foreach ($data as $d) { 
@@ -40,15 +41,14 @@
                         </td>
                         <td><?=ucfirst($d->status)?></td>
                         <td>
-                          <?php if ($d->status == 'diajukan') { ?>
-                          <a onclick="return confirm('apakah anda yakin ingin menerima pengajuan cuti ini?')" href="<?=base_url('admin/cuti_terima/'.$d->id_cuti)?>" class="btn btn-primary btn-sm"><span class="fa fa-check"></span></a>
-                          <a onclick="return confirm('apakah anda yakin ingin menolak pengajuan cuti ini?')" href="<?=base_url('admin/cuti_tolak/'.$d->id_cuti)?>" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
-                          <?php } ?>
-                           <?php if ($d->status == 'diterima') { ?>
-                            <button class="btn btn-primary btn-sm">Anda menerima pengajuan</button>
+                          
+                          <?php if ($d->status == 'diterima') { ?>
+                            <button class="btn btn-primary btn-sm">Pengajuan anda diterima</button>
                           <?php } ?>
                           <?php if ($d->status == 'ditolak') { ?>
-                            <button class="btn btn-danger btn-sm">Anda menolak pengajuan</button>
+                            <button class="btn btn-danger btn-sm">Anda sudah banyak cuti</button>
+                            <br>
+                            
                           <?php } ?>
                         </td>
                       </tr>

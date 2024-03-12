@@ -1,16 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Superadmin extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
 		$this->web = $this->db->get('web')->row();
 		$this->load->library('Pdf');
-		 // Load library Form Validation
-        $this->load->library('form_validation');
-		if ($this->session->userdata('level') != 'admin') {
-			$this->session->set_flashdata('message', 'swal("Ops!", "Anda harus login sebagai admin", "error");');
+		if ($this->session->userdata('level') != 'superadmin') {
+			$this->session->set_flashdata('message', 'swal("Ops!", "Anda harus login sebagai superadmin", "error");');
 			redirect('auth');
 		}
 	}
@@ -20,10 +18,6 @@ class Admin extends CI_Controller {
 		$tahun 			= date('Y');
 		$bulan 			= date('m');
 		$hari 			= date('d');
-		$absen			= $this->M_data->absendaily($this->session->userdata('nim'),$tahun,$bulan,$hari); 
-		if ($absen->num_rows() == 0) { $data['waktu'] = 'masuk'; }
-		elseif ($absen->num_rows() == 1) { $data['waktu'] = 'pulang'; }
-		else { $data['waktu'] = 'dilarang'; }
 		$data['web']	= $this->web;
 		$data['pegawai']= $this->M_data->pegawai()->num_rows();
 		$data['hadir']	= $this->M_data->hadirtoday($tahun,$bulan,$hari)->num_rows();
@@ -32,51 +26,23 @@ class Admin extends CI_Controller {
 		$data['absensi']= $this->M_data->absen()->num_rows();
 		$data['departemen']= $this->db->get('departemen')->num_rows();
 		$data['title']	= 'Dashboard';
-		$data['body']	= 'admin/home';
+		$data['body']	= 'superadmin/home';
 		$this->load->view('template',$data);
-
-		
 	}
-
-	
-	//proses absen
-public function proses_absen()
-{
-    $id = $this->session->userdata('nim');
-    $p = $this->input->post();
-    $data = [
-        'nim'       => $id,
-        'keterangan' => $p['ket']
-    ];
-
-    // Tambahkan catatan jika ada
-    if (isset($p['catatan'])) {
-        $data['catatan'] = $p['catatan'];
-    }
-
-    if ($p['lok'] == '1') {
-        $this->db->insert('absen', $data);
-        $this->session->set_flashdata('message', 'swal("Berhasil!", "Melakukan absen", "success");');
-    } else {
-        $this->session->set_flashdata('message', 'swal("Gagal!", "Melakukan absen", "error");');
-    }
-    redirect('admin');
-}
-
 	//CURD Departemen
 	public function departemen()
 	{
 		$data['web']	= $this->web;
 		$data['data']	= $this->db->get('departemen')->result();
 		$data['title']	= 'Data Departemen';
-		$data['body']	= 'admin/departemen';
+		$data['body']	= 'superadmin/departemen';
 		$this->load->view('template',$data);
 	}
 	public function departemen_add()
 	{
 		$data['web']	= $this->web;
 		$data['title']	= 'Tambah Data Departemen';
-		$data['body']	= 'admin/departemen_add';
+		$data['body']	= 'superadmin/departemen_add';
 		$this->load->view('template',$data);
 	}
 	public function departemen_simpan()
@@ -91,21 +57,21 @@ public function proses_absen()
 		$data['web']	= $this->web;
 		$data['data']	= $this->db->get_where('departemen',['departemen_id'=>$id])->row();
 		$data['title']	= 'Update Data Departemen';
-		$data['body']	= 'admin/departemen_edit';
+		$data['body']	= 'superadmin/departemen_edit';
 		$this->load->view('template',$data);
 	}
 	public function departemen_update($id)
 	{
 		$this->db->update('departemen',['departemen'=>$this->input->post('departemen')],['departemen_id'=>$id]);
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Update departemen", "success");');
-		redirect('admin/departemen');
+		redirect('superadmin/departemen');
 
 	}
 	public function departemen_delete($id)
 	{
 		$this->db->delete('departemen',['departemen_id'=>$id]);
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Delete departemen", "success");');
-		redirect('admin/departemen');
+		redirect('superadmin/departemen');
 
 	}
 	//EDN CURD Departemen
@@ -115,7 +81,7 @@ public function proses_absen()
 		$data['web']	= $this->web;
 		$data['data']	= $this->M_data->pegawai()->result();
 		$data['title']	= 'Data Pegawai';
-		$data['body']	= 'admin/pegawai'; 
+		$data['body']	= 'superadmin/pegawai'; 
 		$this->load->view('template',$data);
 	}
 	public function pegawai_add()
@@ -123,7 +89,7 @@ public function proses_absen()
 		$data['web']	= $this->web;
 		$data['data']	= $this->db->get('departemen')->result();
 		$data['title']	= 'Tambah Data Pegawai';
-		$data['body']	= 'admin/pegawai_add';
+		$data['body']	= 'superadmin/pegawai_add';
 		$this->load->view('template',$data);
 	}
 	public function pegawai_simpan()
@@ -148,7 +114,7 @@ public function proses_absen()
 		$this->db->insert('pegawai',$pgw);
 		$this->db->trans_complete();
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Tambah Data Pegawai", "success");');
-		redirect('admin/pegawai');
+		redirect('superadmin/pegawai');
 	}
 	public function pegawai_edit($id)
 	{
@@ -156,7 +122,7 @@ public function proses_absen()
 		$data['data']	= $this->db->get('departemen')->result();
 		$data['detail']	= $this->M_data->pegawaiid($id)->row();
 		$data['title']	= 'Update Data Pegawai';
-		$data['body']	= 'admin/pegawai_edit';
+		$data['body']	= 'superadmin/pegawai_edit';
 		$this->load->view('template',$data);
 	}
 	public function pegawai_update($id)
@@ -178,7 +144,7 @@ public function proses_absen()
 		$this->db->update('pegawai',$pgw,['nim'=>$id]);
 		$this->db->trans_complete();
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Update Data Pegawai", "success");');
-		redirect('admin/pegawai');
+		redirect('superadmin/pegawai');
 	}
 	public function pegawai_delete($id)
 	{
@@ -187,7 +153,7 @@ public function proses_absen()
 		$this->db->delete('pegawai',['nim'=>$id]);
 		$this->db->trans_complete();
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Delete Data Pegawai", "success");');
-		redirect('admin/pegawai');
+		redirect('superadmin/pegawai');
 	}
 
 	//end CURD pegawai
@@ -199,7 +165,7 @@ public function proses_absen()
 		$data['web']	= $this->web;
 		$data['data']	= $this->M_data->absen()->result();
 		$data['title']	= 'Data Absen Pegawai';
-		$data['body']	= 'admin/absen';
+		$data['body']	= 'superadmin/absen';
 		$this->load->view('template',$data);
 	}
 	public function hapus_semua() {
@@ -208,7 +174,7 @@ public function proses_absen()
         $this->M_data->hapus_semua_data(); // Panggil method hapus_semua_data dari model
         
         // Setelah penghapusan selesai, redirect ke halaman yang sesuai atau tampilkan pesan sukses
-        redirect('admin/absensi'); // Sesuaikan dengan halaman yang ingin Anda arahkan setelah penghapusan
+        redirect('superadmin/absensi'); // Sesuaikan dengan halaman yang ingin Anda arahkan setelah penghapusan
     }
 	public function absen_delete($id)
 	{
@@ -218,59 +184,29 @@ public function proses_absen()
    		$this->db->delete('absen');
     	$this->db->trans_complete();
     	$this->session->set_flashdata('message', 'swal("Berhasil!", "Delete Data absensi", "success");');
-    redirect('admin/absensi');
+    redirect('superadmin/absensi');
 	}
 	
-	//Data pengajuan Revisi
-	public function revisi()
-	{
-		$data['web']	= $this->web;
-		$data['data']	= $this->M_data->revisi()->result();
-		$data['title']	= 'Data Revisi Pegawai';
-		$data['body']	= 'admin/revisi';
-		$this->load->view('template',$data);
-	}
-	public function revisi_terima($id)
-	{
-		$this->db->update('revisi',['status'=>'diterima'],['id_revisi'=>$id]);
-		$this->session->set_flashdata('message', 'swal("Berhasil!", "Menerima pengajuan revisi", "success");');
-		redirect('admin/revisi');
-	}
-	public function revisi_tolak($id)
-	{
-		$this->db->update('revisi',['status'=>'ditolak'],['id_revisi'=>$id]);
-		$this->session->set_flashdata('message', 'swal("Berhasil!", "Menolak pengajuan cuti", "success");');
-		redirect('admin/revisi');
-	}
-	public function hapus_revisi() {
-        // Lakukan penghapusan semua data dari tabel absen
-        $this->load->model('M_data'); // Sesuaikan dengan nama model absen Anda
-        $this->M_data->hapus_semua_revisi(); // Panggil method hapus_semua_data dari model
-        
-        // Setelah penghapusan selesai, redirect ke halaman yang sesuai atau tampilkan pesan sukses
-        redirect('admin/revisi'); // Sesuaikan dengan halaman yang ingin Anda arahkan setelah penghapusan
-    }
-
 	//Data pengajuan cuti
 	public function cuti()
 	{
 		$data['web']	= $this->web;
 		$data['data']	= $this->M_data->cuti()->result();
 		$data['title']	= 'Data Cuti Pegawai';
-		$data['body']	= 'admin/cuti';
+		$data['body']	= 'superadmin/cuti';
 		$this->load->view('template',$data);
 	}
 	public function cuti_terima($id)
 	{
 		$this->db->update('cuti',['status'=>'diterima'],['id_cuti'=>$id]);
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Menerima pengajuan cuti", "success");');
-		redirect('admin/cuti');
+		redirect('superadmin/cuti');
 	}
 	public function cuti_tolak($id)
 	{
 		$this->db->update('cuti',['status'=>'ditolak'],['id_cuti'=>$id]);
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Menolak pengajuan cuti", "success");');
-		redirect('admin/cuti');
+		redirect('superadmin/cuti');
 	}
 	public function hapus_cuti() {
         // Lakukan penghapusan semua data dari tabel absen
@@ -278,7 +214,7 @@ public function proses_absen()
         $this->M_data->hapus_semua_cuti(); // Panggil method hapus_semua_data dari model
         
         // Setelah penghapusan selesai, redirect ke halaman yang sesuai atau tampilkan pesan sukses
-        redirect('admin/cuti'); // Sesuaikan dengan halaman yang ingin Anda arahkan setelah penghapusan
+        redirect('superadmin/cuti'); // Sesuaikan dengan halaman yang ingin Anda arahkan setelah penghapusan
     }
 	//laporan bulanan
 	function laporan(){
@@ -363,7 +299,7 @@ public function proses_absen()
 		$data['web']	= $this->web;
 		$data['data']	= $this->db->get_where('user',['user_id'=>$this->session->userdata('user_id')])->row();
 		$data['title']	= 'Profile Pengguna';
-		$data['body']	= 'admin/profile';
+		$data['body']	= 'superadmin/profile';
 		$this->load->view('template',$data);
 	}
 	public function profile_update($id)
@@ -374,7 +310,7 @@ public function proses_absen()
 		];
 		$this->db->update('user',$usr,['user_id'=>$id]);
 		$this->session->set_flashdata('message', 'swal("Berhasil!", "Update profile", "success");');
-		redirect('admin/profile');
+		redirect('superadmin/profile');
 	}
 	
 	

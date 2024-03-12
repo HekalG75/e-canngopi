@@ -3,7 +3,7 @@
         <!-- Main row -->
         <div class="row">
 
-          <section class="col-lg-12 connectedSortable">
+          <section class="col-lg-12 ">
 
             <!-- Map card -->
             <div class="card">
@@ -16,7 +16,10 @@
                       <th>Nama</th>
                       <th>Waktu</th>
                       <th>Keterangan</th>
-                      <th>Catatan</th>
+                      <th>Apa yang dilakukan hari ini</th>
+                      <th>Apa kendala yang ditemukan hari ini</th>
+                      <th>Bagaimana cara mengatasinya</th>
+                      <th>Apa kegiatan hari berikutnya</th>
                     </thead>
                     <tbody>
                       <?php $no=1; foreach ($data as $d) { ?>
@@ -25,7 +28,10 @@
                         <td><?=ucfirst($d->nama)?></td>
                         <td><?=ucfirst($d->waktu)?></td>
                         <td><?=ucfirst($d->keterangan)?></td>
-                        <td><?=ucfirst($d->catatan)?></td>
+                        <td><?=ucfirst($d->kegiatanhariini)?></td>
+                        <td><?=ucfirst($d->kendala)?></td>
+                        <td><?=ucfirst($d->mengatasi)?></td>
+                        <td><?=ucfirst($d->kegiatanberikut)?></td>
                       </tr>
                       <?php } ?>
                     </tbody>

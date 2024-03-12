@@ -34,27 +34,64 @@
   
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+
 <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-light" style="background-color: #c92222">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button" style="color: white">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </li>
+            </ul>
 
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand  navbar-light" style="background-color: #c92222">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button" style="color: white"><i class="fas fa-bars"></i></a>
-      </li>
-    </ul>
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
 
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <span class="nav-link" style="color: white">
-          <?=$this->M_data->hari(date('D')).', '.$this->M_data->tgl_indo(date('Y-m-d'));?>
-        </span>
-      </li>
-    </ul>
-  </nav>
-  <!-- /.navbar -->
+              <!-- notif hanya ditampilkan pada bagian superadmin -->
+          <?php if ($this->session->userdata('level') == 'superadmin') { ?>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#" style="color: white">
+                        <i class="fas fa-bell"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">Notifikasi</span>
+                        <!-- Tambahkan tindakan notifikasi di sini -->
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-user mr-2"></i> Action 1
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item">
+                            <i class="fas fa-envelope mr-2"></i> Action 2
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item dropdown-footer">Lihat semua notifikasi</a>
+                    </div>
+                </li>
+                <?php } ?>
+
+                <li class="nav-item">
+                    <span class="nav-link" style="color: white">
+                        <?=$this->M_data->hari(date('D')).', '.$this->M_data->tgl_indo(date('Y-m-d'));?>
+                    </span>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Bagian lain dari halaman Anda tetap sama -->
+        <!-- Sidebar, content, footer, dll. -->
+    </div>
+
+    <!-- Skrip JavaScript untuk mengaktifkan dropdown Bootstrap -->
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-toggle').dropdown();
+        });
+    </script>
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #d12626">
@@ -87,8 +124,8 @@
             </a>
           </li>
 
-          <!-- hanya ditampilkan jika user admin yang login -->
-          <?php if ($this->session->userdata('level') == 'admin') { ?>
+          <!-- hanya ditampilkan jika user superadmin yang login -->
+          <?php if ($this->session->userdata('level') == 'superadmin') { ?>
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -114,7 +151,18 @@
             </ul>
           </li>
           <?php } ?>
-          
+
+        <?php if ($this->session->userdata('level') == 'admin'){ ?>
+
+          <li class="nav-item">
+                <a href="<?=base_url($this->session->userdata('level'))?>/pegawai" class="nav-link">
+                  <i class="fa fa-users nav-icon"></i>
+                  <p>Pegawai</p>
+                </a>
+              </li>
+
+       <?php } ?>
+                  
           <li class="nav-item">
             <a href="<?=base_url($this->session->userdata('level'))?>/absensi" class="nav-link">
               <i class="nav-icon fas fa-fingerprint"></i>
@@ -122,12 +170,37 @@
             </a>
           </li>
           
+           <!-- hanya ditampilkan jika user admin yang login -->
+        <?php if ($this->session->userdata('level') == 'admin') { ?>
+
+        <li class="nav-item">
+            <a href="<?= base_url($this->session->userdata('level')) ?>/revisi" class="nav-link">
+                <i class="fas fa-edit nav-icon"></i>
+                <p>Revisi</p>
+            </a>
+        </li>
+
+        <?php } ?>
+
+        <?php if ($this->session->userdata('level') == 'pegawai' || $this->session->userdata('level') == 'pegawaioutside') { ?>
+
+             <li class="nav-item">
+            <a href="<?=base_url($this->session->userdata('level'))?>/revisi_absen" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p> Revisi Absen </p>
+            </a>
+          </li>
+
+      <?php } ?>
+
+
           <li class="nav-item">
             <a href="<?=base_url($this->session->userdata('level'))?>/cuti" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p> Cuti </p>
             </a>
           </li>
+
           <li class="nav-item">
             <a onclick="return confirm('apakah anda yakin ingin keluar ?')" href="<?=base_url('auth')?>/logout" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>

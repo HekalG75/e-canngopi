@@ -30,13 +30,25 @@ class M_data extends CI_Model {
 		$this->db->where('day(waktu)',$hari);
 		return $this->db->get();
 	}
+
+
+	public function revisi_simpan()
+	{
+		$this->db->select('*');
+		$this->db->from('revisi_absen');
+		$this->db->join('pegawai','revisi_absen.nim = pegawai.nim');
+		$this->db->join('user','pegawai.nim = user.nim');
+		$this->db->order_by('revisi_absen.id_revisi','keterangan');
+		return $this->db->get();
+	}
+
 	public function absen()
 	{
 		$this->db->select('*');
 		$this->db->from('absen');
 		$this->db->join('pegawai','absen.nim = pegawai.nim');
 		$this->db->join('user','pegawai.nim = user.nim');
-		$this->db->order_by('absen.waktu','desc','catatan');
+		$this->db->order_by('absen.waktu','desc','kegiatanhariini','kendala','mengatasi','kegiatanberikut');
 		return $this->db->get();
 	}
 	public function hapus_semua_data() {
@@ -54,9 +66,34 @@ class M_data extends CI_Model {
 		$this->db->join('pegawai','absen.nim = pegawai.nim');
 		$this->db->join('user','pegawai.nim = user.nim');
 		$this->db->where('pegawai.nim',$id);
-		$this->db->order_by('absen.waktu','desc','catatan');
+		$this->db->order_by('absen.waktu','desc','kegiatanhariini','kendala','mengatasi','kegiatanberikut');
 		return $this->db->get();
 	}
+	
+	public function revisi()
+	{
+		$this->db->select('*');
+		$this->db->from('revisi_absen');
+		$this->db->join('pegawai','revisi_absen.nim = pegawai.nim');
+		$this->db->join('user','pegawai.nim = user.nim');
+		$this->db->order_by('revisi_absen.id_revisi','desc');
+		return $this->db->get();
+	}
+	public function revisi_pegawai($id)
+	{
+		$this->db->select('*');
+		$this->db->from('revisi_absen');
+		$this->db->join('pegawai','revisi_absen.nim = pegawai.nim');
+		$this->db->join('user','pegawai.nim = user.nim');
+		$this->db->where('pegawai.nim',$id);
+		$this->db->order_by('revisi_absen.id_revisi','desc');
+		return $this->db->get();
+	}
+	public function hapus_semua_revisi() {
+        
+        $this->db->empty_table('revisi_absen'); 
+    }
+
 
 	public function cuti()
 	{

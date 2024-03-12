@@ -14,13 +14,13 @@
         <!-- Main row -->
         <div class="row">
 
-          <section class="col-lg-12 ">
+          <section class="col-lg-12">
     <!-- Map card -->
     <div class="card">
         <div class="card-header">
             Notifikasi
         </div>
-        <form method="post" action="pegawaioutside/proses_absen">
+        <form method="post" action="hrd/proses_absen">
             <div class="card-body">
                 <?php if ($waktu != 'dilarang') { ?>
                 <p class="text-center">Hai, <?=$this->session->userdata('nama')?> anda hari ini belum melakukan absen <b><?=$waktu?></b>. Silahkan lakukan absen pada tombol absen berikut <br><br>
@@ -29,30 +29,11 @@
                 <input type="hidden" name="ket" id="ket" value="<?=$waktu?>">
                 <input type="hidden" name="lok" id="lok" value="1">
                 <!-- Kotak catatan opsional -->
-                <?php if ($waktu == 'masuk') { ?>
                 <div class="form-group">
-                    <label for="catatan">Apa yang dilakukan hari ini!</label> 
-                    <textarea class="form-control" id="kegiatanhariini" name="kegiatanhariini" rows="3" required></textarea>
-                </div>
-                <?php } ?>
-                <?php if ($waktu == 'pulang') { ?>
-                <div class="form-group">
-                    <label for="catatan">Apa yang dilakukan hari ini!</label> 
-                    <textarea class="form-control" id="kegiatanhariini" name="kegiatanhariini" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="kendala">Apa kendala yang ditemukan hari ini!</label> 
-                    <textarea class="form-control" id="kendala" name="kendala" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="penyelesaian">Bagaimana cara mengatasinya!</label> 
-                    <textarea class="form-control" id="mengatasi" name="mengatasi" rows="3" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="kegiatan_berikutnya">Apa kegiatan hari berikutnya!</label> 
-                    <textarea class="form-control" id="kegiatanberikut" name="kegiatanberikut" rows="3" required></textarea>
-                </div>
-                <?php } ?>
+                  <label for="catatan">Catatan (Opsional)</label>
+                  <textarea class="form-control" id="catatan" name="catatan" rows="3" required></textarea>
+              </div>
+                
                 <?php } else { ?>
                 <p class="text-center">Hai, <?=$this->session->userdata('nama')?> anda hari ini sudah melakukan absensi <b>Masuk</b>dan <b>Pulang</b></p>
                 <?php }  ?>
@@ -60,7 +41,6 @@
         </form>
     </div>
 </section>
-
         </div>
       </div>
     </section>

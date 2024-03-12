@@ -9,17 +9,22 @@
             <div class="card">
               <div class="card-header"> <?=$title?> </h3>
               </div>
+              
               <div class="card-body table-responsive">
-                <table id="table" class="table table-bordered table-striped text-center">
+                <table id="myTable" class="table table-bordered table-striped text-center">
                     <thead>
-                      <th>No</th>
+
+                      <!-- Tombol hapus semua data absen -->
+          <a onclick="return confirm('Apakah Anda yakin ingin menghapus semua data absensi?')" href="<?=base_url('hrd/hapus_semua')?>" class="btn btn-danger btn-sm float-right"><span class="fa fa-trash"></span> Hapus Semua Data</a>
+        </div>
+
+
+                      <th>No</th> 
                       <th>Nama</th>
                       <th>Waktu</th>
                       <th>Keterangan</th>
-                      <th>Apa yang dilakukan hari ini</th>
-                      <th>Apa kendala yang ditemukan hari ini</th>
-                      <th>Bagaimana cara mengatasinya</th>
-                      <th>Apa kegiatan hari berikutnya</th>
+                      <th>Catatan</th>
+                      
                     </thead>
                     <tbody>
                       <?php $no=1; foreach ($data as $d) { ?>
@@ -28,17 +33,17 @@
                         <td><?=ucfirst($d->nama)?></td>
                         <td><?=ucfirst($d->waktu)?></td>
                         <td><?=ucfirst($d->keterangan)?></td>
-                         <td><?=ucfirst($d->kegiatanhariini)?></td>
-                        <td><?=ucfirst($d->kendala)?></td>
-                        <td><?=ucfirst($d->mengatasi)?></td>
-                        <td><?=ucfirst($d->kegiatanberikut)?></td>
+                        <td><?=ucfirst($d->catatan)?></td>
+                        
                       </tr>
                       <?php } ?>
                     </tbody>
                   </table>
-              </div>
-            </div>
+
           </section>
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
         </div>
       </div>
     </section>

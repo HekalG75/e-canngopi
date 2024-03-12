@@ -8,7 +8,7 @@
             <!-- Map card -->
             <div class="card">
               <div class="card-header"> <?=$title?> </h3>
-                <a style="float: right;" href="<?=base_url('admin/pegawai_add')?>" class="btn btn-sm btn-primary">Tambah data</a>
+                <a style="float: right;" href="<?=base_url('superadmin/pegawai_add')?>" class="btn btn-sm btn-primary">Tambah data</a>
               </div>
               <div class="card-body table-responsive">
                 <table id="myTable" class="table table-bordered table-striped text-center">
@@ -21,7 +21,7 @@
                       <th>Waktu Masuk</th>
                       <th>Level</th>
                      
-                     
+                      <th>Opsi</th>
                     </thead>
                     <tbody>
                       <?php $no=1; foreach ($data as $d) { ?>
@@ -34,7 +34,10 @@
                         <td><?=$d->waktu_masuk?></td>
                         <td><?=$d->level?></td>
                         
-                        
+                        <td>
+                          <a href="<?=base_url('superadmin/pegawai_edit/'.$d->nim)?>" class="btn btn-primary btn-sm"><span class="fa fa-edit"></span></a>
+                          <a onclick="return confirm('apakah anda yakin ingin menghapus pegawai ini?')" href="<?=base_url('superadmin/pegawai_delete/'.$d->nim)?>" class="btn btn-danger btn-sm"><span class="fa fa-trash"></span></a>
+                        </td>
                       </tr>
                       <?php } ?>
                     </tbody>
