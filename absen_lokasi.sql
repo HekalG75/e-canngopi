@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Feb 2024 pada 19.07
+-- Waktu pembuatan: 12 Mar 2024 pada 07.36
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `absen_lokasi`
+-- Database: `absen_canngopi`
 --
 
 -- --------------------------------------------------------
@@ -32,8 +32,23 @@ CREATE TABLE `absen` (
   `nim` varchar(50) NOT NULL,
   `waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `keterangan` varchar(100) NOT NULL,
-  `catatan` text NOT NULL
+  `kegiatanhariini` text NOT NULL,
+  `kendala` text NOT NULL,
+  `mengatasi` text NOT NULL,
+  `kegiatanberikut` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `absen`
+--
+
+INSERT INTO `absen` (`id_absen`, `nim`, `waktu`, `keterangan`, `kegiatanhariini`, `kendala`, `mengatasi`, `kegiatanberikut`) VALUES
+(51, '2119238212', '2024-03-08 15:40:54', 'masuk', 'asd', '', '', ''),
+(52, '2119238212', '2024-03-08 15:41:08', 'pulang', 'asd', 'asd', 'asd', 'asd'),
+(53, '2119238212', '2024-03-09 05:16:55', 'masuk', 'hari ini menjadi kitchen', '', '', ''),
+(54, '2119238212', '2024-03-09 05:17:19', 'pulang', 'menjadi kitchen', 'beras abis', 'beli', 'jadi waiters'),
+(55, '5213', '2024-03-09 10:22:55', 'masuk', 'hari ini mengerjakan  sistem absensi', '', '', ''),
+(56, '5213', '2024-03-09 10:23:36', 'pulang', 'asd', 'aasd', 'asd', 'asd');
 
 -- --------------------------------------------------------
 
@@ -56,7 +71,7 @@ CREATE TABLE `cuti` (
 --
 
 INSERT INTO `cuti` (`id_cuti`, `nim`, `jenis_cuti`, `bukti`, `alasan`, `status`, `waktu_pengajuan`) VALUES
-(31, '2110102019', 'izin', NULL, 'fasfa', 'diterima', '2024-02-18 06:12:05');
+(3, '2119238212', 'izin', NULL, 'ada urusan keluarga', 'diajukan', '2024-03-10 06:35:59');
 
 -- --------------------------------------------------------
 
@@ -74,9 +89,8 @@ CREATE TABLE `departemen` (
 --
 
 INSERT INTO `departemen` (`departemen_id`, `departemen`) VALUES
-(1, 'Keuangan'),
-(2, 'Administrasi'),
-(7, 'kicken');
+(1, 'Administrasi'),
+(6, 'kitchen');
 
 -- --------------------------------------------------------
 
@@ -109,7 +123,30 @@ INSERT INTO `detailcuti` (`id_detail`, `id_cuti`, `tanggal`) VALUES
 (31, 28, '2024-02-14'),
 (32, 29, '2024-02-18'),
 (33, 30, '2024-02-18'),
-(34, 31, '2024-02-18');
+(34, 31, '2024-02-18'),
+(35, 1, '2024-02-22'),
+(36, 1, '2024-03-10'),
+(37, 2, '2024-03-10'),
+(38, 3, '2024-03-10');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `detailrevisi`
+--
+
+CREATE TABLE `detailrevisi` (
+  `id_detail` int(11) NOT NULL,
+  `id_revisi` int(11) NOT NULL,
+  `tanggal` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `detailrevisi`
+--
+
+INSERT INTO `detailrevisi` (`id_detail`, `id_revisi`, `tanggal`) VALUES
+(0, 3, '1970-01-01');
 
 -- --------------------------------------------------------
 
@@ -122,7 +159,7 @@ CREATE TABLE `pegawai` (
   `jenis_kelamin` enum('L','P') NOT NULL,
   `waktu_masuk` date NOT NULL,
   `id_departemen` int(11) NOT NULL,
-  `level` enum('admin','pegawai','pegawaioutside') NOT NULL
+  `level` enum('admin','pegawai','pegawaioutside','superadmin','hrd') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -130,22 +167,36 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`nim`, `jenis_kelamin`, `waktu_masuk`, `id_departemen`, `level`) VALUES
-('1', 'L', '2024-02-10', 2, 'pegawaioutside'),
-('10', 'L', '2024-02-11', 6, 'pegawaioutside'),
-('11', 'L', '2024-02-11', 7, 'pegawaioutside'),
-('123123321', 'L', '2024-02-14', 2, 'pegawaioutside'),
-('2', 'P', '2024-02-10', 2, 'pegawaioutside'),
-('2110102018', 'L', '2024-02-03', 2, 'pegawai'),
-('2110102019', 'P', '2024-02-03', 2, 'pegawaioutside'),
-('2233', 'L', '2024-02-11', 7, 'pegawaioutside'),
-('26', 'L', '2024-02-11', 2, 'pegawaioutside'),
-('3', 'L', '2024-02-10', 1, 'pegawaioutside'),
-('4', 'P', '2024-02-10', 2, 'pegawaioutside'),
-('5', 'L', '2024-02-11', 2, 'pegawaioutside'),
-('6', 'L', '2024-02-11', 2, 'pegawaioutside'),
-('7', 'L', '2024-02-11', 2, 'pegawaioutside'),
-('8', 'L', '2024-02-22', 6, 'pegawaioutside'),
-('9', 'P', '2024-02-11', 2, 'pegawaioutside');
+('1221', 'L', '2024-02-22', 1, 'pegawai'),
+('2110102018', 'L', '2024-02-22', 1, 'pegawai'),
+('2111923812', 'L', '2024-03-04', 1, 'admin'),
+('2119238212', 'L', '2024-02-22', 1, 'pegawaioutside'),
+('21213123', 'L', '2024-02-22', 2, 'pegawaioutside'),
+('5213', 'L', '2024-03-08', 1, 'pegawaioutside'),
+('523423432', 'L', '2024-03-04', 6, 'hrd'),
+('5324234', 'P', '2024-03-08', 1, 'pegawai'),
+('83123021', 'L', '2024-02-28', 1, 'superadmin');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `revisi_absen`
+--
+
+CREATE TABLE `revisi_absen` (
+  `id_revisi` int(11) NOT NULL,
+  `waktu` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `keterangan` text DEFAULT NULL,
+  `status` enum('diajukan','diterima','ditolak') NOT NULL,
+  `nim` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `revisi_absen`
+--
+
+INSERT INTO `revisi_absen` (`id_revisi`, `waktu`, `keterangan`, `status`, `nim`) VALUES
+(3, '2024-03-10 06:55:06', 'asd', 'diajukan', '2119238212');
 
 -- --------------------------------------------------------
 
@@ -158,7 +209,7 @@ CREATE TABLE `user` (
   `nama` varchar(254) NOT NULL,
   `email` varchar(254) NOT NULL,
   `password` varchar(254) NOT NULL,
-  `level` enum('admin','pegawai','pegawaioutside') NOT NULL,
+  `level` enum('admin','pegawai','pegawaioutside','superadmin','hrd') NOT NULL,
   `nim` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -167,12 +218,15 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `nama`, `email`, `password`, `level`, `nim`) VALUES
-(1, 'Administrator', 'admin@admin.com', '202cb962ac59075b964b07152d234b70', 'admin', NULL),
-(37, 'useronsite', 'useron@gmail.com', '6ad14ba9986e3615423dfca256d04e3f', 'pegawai', '2110102018'),
-(39, 'useroutside', 'userout@gmail.com', '6ad14ba9986e3615423dfca256d04e3f', 'pegawaioutside', '2110102019'),
-(52, 'haikal', 'haikal@gmail.com', '539760b3222370b2754cbac577b2fc31', 'admin', ''),
-(53, 'anjay', 'anjay@gmail.com', 'de12f5798f86bdcc5c759a645e913e4c', 'pegawaioutside', '2233'),
-(54, 'hekal', 'hekal@gmail.com', '539760b3222370b2754cbac577b2fc31', 'pegawaioutside', '123123321');
+(1, 'Administrator2', 'admin@admin.com', '202cb962ac59075b964b07152d234b70', 'admin', NULL),
+(55, 'useron2', 'useron@gmail.com', '6ad14ba9986e3615423dfca256d04e3f', 'pegawai', '2110102018'),
+(57, 'haikal', 'haikal@gmail.com', '539760b3222370b2754cbac577b2fc31', 'superadmin', ''),
+(58, 'userout', 'userout@gmail.com', '6ad14ba9986e3615423dfca256d04e3f', 'pegawaioutside', '2119238212'),
+(60, 'ekal', 'ekal@gmail.com', '539760b3222370b2754cbac577b2fc31', 'superadmin', '83123021'),
+(62, 'hekal', 'hekal@gmail.com', '539760b3222370b2754cbac577b2fc31', 'hrd', '523423432'),
+(65, 'hekral', 'hekral@gmail.com', '539760b3222370b2754cbac577b2fc31', 'admin', '2111923812'),
+(66, 'udin', 'udin@gmail.com', '202cb962ac59075b964b07152d234b70', 'pegawaioutside', '5213'),
+(67, 'didin', 'didin@gmail.com', '202cb962ac59075b964b07152d234b70', 'pegawai', '5324234');
 
 -- --------------------------------------------------------
 
@@ -185,7 +239,6 @@ CREATE TABLE `web` (
   `logo` varchar(254) NOT NULL,
   `nama` varchar(254) NOT NULL,
   `author` varchar(254) NOT NULL,
-  `alamat` text NOT NULL,
   `nohp` varchar(20) NOT NULL,
   `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -194,8 +247,8 @@ CREATE TABLE `web` (
 -- Dumping data untuk tabel `web`
 --
 
-INSERT INTO `web` (`id_web`, `logo`, `nama`, `author`, `alamat`, `nohp`, `email`) VALUES
-(1, 'canngopilogo.png', 'E - CanNgopi', 'Muhammad Haikal', 'Kelapa dua no 2 tangerang banten', '089503725636', 'Haikal@gmail.com');
+INSERT INTO `web` (`id_web`, `logo`, `nama`, `author`, `nohp`, `email`) VALUES
+(1, 'canngopilogo.png', 'E - CanNgopi', 'Muhammad Haikal', '089503725636', 'Haikal@gmail.com');
 
 --
 -- Indexes for dumped tables
@@ -226,10 +279,22 @@ ALTER TABLE `detailcuti`
   ADD PRIMARY KEY (`id_detail`);
 
 --
+-- Indeks untuk tabel `detailrevisi`
+--
+ALTER TABLE `detailrevisi`
+  ADD PRIMARY KEY (`id_detail`);
+
+--
 -- Indeks untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`nim`);
+
+--
+-- Indeks untuk tabel `revisi_absen`
+--
+ALTER TABLE `revisi_absen`
+  ADD PRIMARY KEY (`id_revisi`);
 
 --
 -- Indeks untuk tabel `user`
@@ -251,31 +316,37 @@ ALTER TABLE `web`
 -- AUTO_INCREMENT untuk tabel `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+  MODIFY `id_absen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT untuk tabel `cuti`
 --
 ALTER TABLE `cuti`
-  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_cuti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `departemen`
 --
 ALTER TABLE `departemen`
-  MODIFY `departemen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `departemen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `detailcuti`
 --
 ALTER TABLE `detailcuti`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
+-- AUTO_INCREMENT untuk tabel `revisi_absen`
+--
+ALTER TABLE `revisi_absen`
+  MODIFY `id_revisi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT untuk tabel `web`
